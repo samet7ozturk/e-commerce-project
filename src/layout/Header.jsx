@@ -1,8 +1,124 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPhone,
+  faEnvelope,
+  faMagnifyingGlass,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faInstagram,
+  faYoutube,
+  faFacebook,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
+
 const Header = () => {
   return (
-    <>
-      <h1>Merhaba</h1>
-    </>
+    <main className="font-bold">
+      <header className="h-[58px] xl:flex md:flex hidden xl:flex-wrap md:flex-wrap flex-wrap justify-around bg-[#252B42] text-white">
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-2">
+            <FontAwesomeIcon icon={faPhone} />
+            <p>(225) 555-0118</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <FontAwesomeIcon icon={faEnvelope} />
+            <p>michelle.rivera@example.com</p>
+          </div>
+        </div>
+        <div className="flex items-center">
+          Follow us and get a chance to win 80% off
+        </div>
+        <div className="flex items-center gap-4">
+          <p>Follow Us :</p>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+
+          <a
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faYoutube} />
+          </a>
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faFacebook} />
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faTwitter} />
+          </a>
+        </div>
+      </header>
+
+      <nav className="h-[76px] flex justify-around bg-white">
+        <div className="flex flex-wrap gap-44">
+          <div className="flex items-center">
+            <h2 className="text-[#252B42] text-2xl">Bandage</h2>
+          </div>
+          <div className="flex gap-12 text-[#737373] text-sm">
+            <div className="flex items-center ">
+              <Link to="/shop">Shop</Link>
+            </div>
+            <div className="flex items-center">
+              <Link to="/about">About</Link>
+            </div>
+            <div className="flex items-center">
+              <Link to="/blog">Blog</Link>
+            </div>
+            <div className="flex items-center">
+              <Link to="/contact">Contact</Link>
+            </div>
+            <div className="flex items-center">
+              <Link to="/pages">Pages</Link>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-8 text-[#23A6F0] items-center">
+          <div className="flex">
+            <Link to="/profile">
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+
+            <Link to="/login">Login</Link>
+            <p>/</p>
+            <Link to="/register">Register</Link>
+          </div>
+          <Link to="/search">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </Link>
+
+          <div className="flex items-center">
+            <Link to="/basket">
+              <FontAwesomeIcon icon={faCartShopping} />
+            </Link>
+            <p>1</p>
+          </div>
+          <div className="flex items-center">
+            <Link to="/favorites">
+              <FontAwesomeIcon icon={faHeart} />
+            </Link>
+            <p>1</p>
+          </div>
+        </div>
+      </nav>
+    </main>
   );
 };
 
