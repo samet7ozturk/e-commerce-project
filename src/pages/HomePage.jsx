@@ -1,11 +1,14 @@
 import Header from "../layout/Header";
+import { CarouselTransition } from "../layout/Carousel";
+import EditorsPick from "../layout/EditorsPick";
 
 const HomePage = () => {
   return (
-    <>
+    <main className=" font-montserrat">
       <Header />
-      <h1>Merhaba</h1>
-    </>
+      <CarouselTransition />
+      <EditorsPick />
+    </main>
   );
 };
 
