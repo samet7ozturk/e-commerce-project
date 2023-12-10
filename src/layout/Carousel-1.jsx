@@ -1,7 +1,7 @@
 import { Carousel } from "@material-tailwind/react";
 import img1 from "../assets/slide-1.jpg";
 
-export function CarouselTransition() {
+export function Carousel1() {
   return (
     <Carousel transition={{ duration: 2 }}>
       <img
