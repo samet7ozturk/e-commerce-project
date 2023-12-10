@@ -1,15 +1,17 @@
-import Header from "../layout/Header";
-import { CarouselTransition } from "../layout/Carousel";
+import Header from "../components/Header";
+import { Carousel1 } from "../layout/Carousel-1";
 import EditorsPick from "../layout/EditorsPick";
 import BestSellerProduct from "../layout/BestSellerProducts";
+import { Carousel2 } from "../layout/Carousel-2";
 
 const HomePage = () => {
   return (
     <main className=" font-montserrat">
       <Header />
-      <CarouselTransition />
+      <Carousel1 />
       <EditorsPick />
       <BestSellerProduct />
+      <Carousel2 />
     </main>
   );
 };
