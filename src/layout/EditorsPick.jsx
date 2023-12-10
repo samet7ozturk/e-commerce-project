@@ -8,7 +8,7 @@ import img4 from "../assets/editors-pick-4.png";
 
 const EditorsPick = () => {
   return (
-    <main className="h-[770px]">
+    <main className="h-[770px] bg-[#FAFAFA]">
       <div className="flex flex-col items-center pt-20 pb-12">
         <h2 className="text-[#252B42] text-2xl font-bold">EDITOR'S PICK</h2>
         <p className="text-[#737373] text-sm font-normal">
