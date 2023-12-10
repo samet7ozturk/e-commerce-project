@@ -1,6 +1,7 @@
 import Header from "../layout/Header";
 import { CarouselTransition } from "../layout/Carousel";
 import EditorsPick from "../layout/EditorsPick";
+import BestSellerProduct from "../layout/BestSellerProducts";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Header />
       <CarouselTransition />
       <EditorsPick />
+      <BestSellerProduct />
     </main>
   );
 };
