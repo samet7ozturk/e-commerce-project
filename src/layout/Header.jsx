@@ -67,12 +67,12 @@ const Header = () => {
         </div>
       </header>
 
-      <nav className="h-[76px] flex justify-around bg-white">
-        <div className="flex flex-wrap gap-44">
+      <nav className="h-[76px] flex bg-white">
+        <div className="flex flex-wrap justify-around w-5/12">
           <div className="flex items-center">
             <h2 className="text-[#252B42] text-2xl">Bandage</h2>
           </div>
-          <div className="flex gap-12 text-[#737373] text-sm">
+          <div className="flex flex-wrap gap-12 text-[#737373] text-sm">
             <div className="flex items-center ">
               <Link to="/shop">Shop</Link>
             </div>
@@ -90,8 +90,9 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-8 text-[#23A6F0] items-center">
-          <div className="flex">
+        <div className="flex flex-wrap justify-around w-3/12"></div>
+        <div className="flex flex-wrap gap-8 w-4/12 text-[#23A6F0] items-center justify-center">
+          <div className="flex gap-2">
             <Link to="/profile">
               <FontAwesomeIcon icon={faUser} />
             </Link>
@@ -104,13 +105,13 @@ const Header = () => {
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </Link>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Link to="/basket">
               <FontAwesomeIcon icon={faCartShopping} />
             </Link>
             <p>1</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Link to="/favorites">
               <FontAwesomeIcon icon={faHeart} />
             </Link>
