@@ -20,7 +20,7 @@ const EditorsPick = () => {
       <div className="flex flex-wrap gap-8 justify-center pb-20">
         <div className="relative">
           <img src={img1} alt="Image 1" className="w-full" />
-          <div className="absolute top-[260px] w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
+          <div className="absolute top-[85%] left-8 w-[32%] h-12 inset-0 flex items-center justify-center bg-white hover:scale-110 hover:drop-shadow-lg transition duration-300 hover:bg-white/80">
             <div className="text-center">
               <Link
                 to="/details1"
@@ -33,7 +33,7 @@ const EditorsPick = () => {
         </div>
         <div className="relative">
           <img src={img2} alt="Image 2" className="w-full" />
-          <div className="absolute w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
+          <div className="absolute top-[85%] left-8 w-[50%] h-12 inset-0 flex items-center justify-center bg-white hover:scale-110 hover:drop-shadow-lg transition duration-300 hover:bg-white/80">
             <div className="text-center">
               <Link
                 to="/details2"
@@ -47,7 +47,7 @@ const EditorsPick = () => {
         <div className="flex flex-col gap-4">
           <div className="relative">
             <img src={img3} alt="Image 3" className="w-full" />
-            <div className="absolute w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
+            <div className="absolute top-[70%] left-4 w-[70%] h-12 inset-0 flex items-center justify-center bg-white hover:scale-110 hover:drop-shadow-lg transition duration-300 hover:bg-white/80">
               <div className="text-center">
                 <Link
                   to="/details3"
@@ -60,7 +60,7 @@ const EditorsPick = () => {
           </div>
           <div className="relative">
             <img src={img4} alt="Image 4" className="w-full" />
-            <div className="absolute  w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
+            <div className="absolute top-[70%] left-4 w-[50%] h-12 inset-0 flex items-center justify-center bg-white hover:scale-110 hover:drop-shadow-lg transition duration-300 hover:bg-white/80">
               <div className="text-center">
                 <Link
                   to="/details4"
