@@ -3,6 +3,8 @@ import { Carousel1 } from "../layout/Carousel-1";
 import EditorsPick from "../layout/EditorsPick";
 import BestSellerProduct from "../layout/BestSellerProducts";
 import { Carousel2 } from "../layout/Carousel-2";
+import ProductIntroduction from "../layout/ProductIntroduction";
+import FeaturedPost from "../layout/FeaturedPost";
 
 const HomePage = () => {
   return (
@@ -12,6 +14,8 @@ const HomePage = () => {
       <EditorsPick />
       <BestSellerProduct />
       <Carousel2 />
+      <ProductIntroduction />
+      <FeaturedPost />
     </main>
   );
 };
