@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import ProductCard from "../components/ProductCard";
 
 import img1 from "../assets/bestseller-products-1.png";
@@ -22,70 +24,94 @@ const BestSellerProduct = () => {
         </p>
       </div>
       <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 pt-14 pb-20">
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img1}
             alt="img1"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img2}
             alt="img2"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img3}
             alt="img3"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img4}
             alt="img4"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img5}
             alt="img5"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img6}
             alt="img6"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img7}
             alt="img7"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
-        <div className="hover:scale-110 hover:drop-shadow-xl transition duration-300">
+        </Link>
+        <Link
+          to="/product-page"
+          className="hover:scale-110 hover:drop-shadow-xl transition duration-300"
+        >
           <img
             src={img8}
             alt="img8"
             className="cursor-pointer hover:scale-110 transition duration-300"
           />
           <ProductCard />
-        </div>
+        </Link>
       </div>
     </main>
   );
