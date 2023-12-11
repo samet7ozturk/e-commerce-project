@@ -19,7 +19,7 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 const Header = () => {
   return (
     <main className="font-bold">
-      <header className="h-[58px] xl:flex md:flex hidden xl:flex-wrap md:flex-wrap flex-wrap justify-around bg-[#252B42] text-white">
+      <header className="h-[58px] px-[3%] xl:flex md:flex hidden xl:flex-wrap md:flex-wrap flex-wrap justify-between bg-[#252B42] text-white">
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faPhone} />
@@ -34,7 +34,8 @@ const Header = () => {
           Follow us and get a chance to win 80% off
         </div>
         <div className="flex items-center gap-4">
-          <p>Follow Us :</p>
+          <p>Follow Us</p>
+          <p>:</p>
           <a
             href="https://www.instagram.com/"
             target="_blank"
@@ -67,8 +68,8 @@ const Header = () => {
         </div>
       </header>
 
-      <nav className="h-[76px] flex bg-white">
-        <div className="flex flex-wrap justify-around w-5/12">
+      <nav className="h-[76px] px-[3%] flex bg-white">
+        <div className="flex flex-wrap justify-between w-5/12">
           <div className="flex items-center">
             <h2 className="text-[#252B42] text-2xl">Bandage</h2>
           </div>
@@ -90,8 +91,8 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap justify-around w-3/12"></div>
-        <div className="flex flex-wrap gap-8 w-4/12 text-[#23A6F0] items-center justify-center">
+        <div className="w-3/12"></div>
+        <div className="flex flex-wrap gap-8 w-4/12 text-[#23A6F0] items-center justify-end">
           <div className="flex gap-2">
             <Link to="/profile">
               <FontAwesomeIcon icon={faUser} />
