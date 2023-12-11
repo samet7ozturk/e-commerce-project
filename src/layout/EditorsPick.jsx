@@ -8,17 +8,19 @@ import img4 from "../assets/editors-pick-4.png";
 
 const EditorsPick = () => {
   return (
-    <main className="h-[770px] bg-[#FAFAFA]">
+    <main className="bg-[#FAFAFA]">
       <div className="flex flex-col items-center pt-20 pb-12">
-        <h2 className="text-[#252B42] text-2xl font-bold">EDITOR'S PICK</h2>
+        <h2 className="text-[#252B42] text-2xl font-bold pb-2">
+          EDITOR'S PICK
+        </h2>
         <p className="text-[#737373] text-sm font-normal">
           Problems trying to resolve the conflict between
         </p>
       </div>
-      <div className="flex gap-8 justify-center">
+      <div className="flex flex-wrap gap-8 justify-center pb-20">
         <div className="relative">
           <img src={img1} alt="Image 1" className="w-full" />
-          <div className="absolute w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
+          <div className="absolute top-[260px] w-[170px] h-12 inset-0 flex items-center justify-center bg-white">
             <div className="text-center">
               <Link
                 to="/details1"
