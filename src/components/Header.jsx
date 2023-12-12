@@ -100,7 +100,7 @@ const Header = () => {
 
             <Link to="/login">Login</Link>
             <p>/</p>
-            <Link to="/register">Register</Link>
+            <Link to="/signup-page">Register</Link>
           </div>
           <Link to="/search">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
