@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import ProductPage from "../pages/ProductPage";
 import AboutPage from "../pages/AboutPage";
 import TeamPage from "../pages/TeamPage";
+import ContactPage from "../pages/ContactPage";
 
 const PageContent = () => {
   return (
@@ -17,6 +18,8 @@ const PageContent = () => {
         <Route path="/about-page" element={<AboutPage />} />
 
         <Route path="/team-page" element={<TeamPage />} />
+
+        <Route path="/contact-page" element={<ContactPage />} />
 
         <Route path="*" element={<h1>404 Not Found Page</h1>} />
       </Routes>
