@@ -28,11 +28,15 @@ const AboutPage = () => {
             We know how large objects will act, but things on a small scale
           </p>
           <div>
-            <img src={svg1} alt="svg1" className="cursor-pointer pt-8" />
+            <img
+              src={svg1}
+              alt="svg1"
+              className="cursor-pointer pt-8 hover:scale-110 transition duration-200"
+            />
           </div>
         </div>
         <div className="flex w-1/2 justify-end">
-          <img src={img1} alt="img1" className="cursor-pointer" />
+          <img src={img1} alt="img1" />
         </div>
       </div>
       <div className="flex flex-col px-[12%] pb-12">
@@ -68,7 +72,11 @@ const AboutPage = () => {
       <div className="relative flex justify-center py-28">
         <img src={img2} alt="img2" className="rounded-3xl" />
         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2">
-          <img src={svg2} alt="svg2" className="cursor-pointer pt-8" />
+          <img
+            src={svg2}
+            alt="svg2"
+            className="cursor-pointer pt-8 hover:scale-110 transition duration-150"
+          />
         </div>
       </div>
       <div className="flex flex-col items-center pt-[110px] pb-[145px]">
