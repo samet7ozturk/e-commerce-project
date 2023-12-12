@@ -19,7 +19,7 @@ const TeamCard = () => {
           <p className="text-[#252B42] font-bold pt-8">Username</p>
           <p className="text-[#737373] text-sm font-bold pt-4">Profession</p>
         </div>
-        <div className="flex gap-2 text-[#23A6F0] justify-center pt-[12px]">
+        <div className="flex gap-4 text-[#23A6F0] justify-center pt-[12px]">
           <a
             href="https://www.facebook.com/"
             target="_blank"
@@ -51,7 +51,7 @@ const TeamCard = () => {
           <p className="text-[#252B42] font-bold pt-8">Username</p>
           <p className="text-[#737373] text-sm font-bold pt-4">Profession</p>
         </div>
-        <div className="flex gap-2 text-[#23A6F0] justify-center pt-[12px]">
+        <div className="flex gap-4 text-[#23A6F0] justify-center pt-[12px]">
           <a
             href="https://www.facebook.com/"
             target="_blank"
@@ -83,7 +83,7 @@ const TeamCard = () => {
           <p className="text-[#252B42] font-bold pt-8">Username</p>
           <p className="text-[#737373] text-sm font-bold pt-4">Profession</p>
         </div>
-        <div className="flex gap-2 text-[#23A6F0] justify-center pt-[12px]">
+        <div className="flex gap-4 text-[#23A6F0] justify-center pt-[12px]">
           <a
             href="https://www.facebook.com/"
             target="_blank"
