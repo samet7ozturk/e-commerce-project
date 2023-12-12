@@ -84,7 +84,7 @@ const Header = () => {
               <Link to="/blog">Blog</Link>
             </div>
             <div className="flex items-center">
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact-page">Contact</Link>
             </div>
             <div className="flex items-center">
               <Link to="/pages">Pages</Link>
