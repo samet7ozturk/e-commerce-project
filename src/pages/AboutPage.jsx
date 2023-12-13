@@ -18,13 +18,15 @@ const AboutPage = () => {
   return (
     <main className=" font-montserrat">
       <Header />
-      <div className="flex px-[10%]">
-        <div className="flex flex-col w-1/2 justify-center">
-          <p className="text-[#252B42] font-bold">ABOUT COMPANY</p>
-          <h1 className="text-[#252B42] text-[58px] font-bold pt-8">
+      <div className="flex flex-wrap sm:flex-wrap md:flex-nowrap xl:flex-nowrap justify-between px-[10%] gap-16">
+        <div className="flex flex-wrap flex-col justify-center items-center sm:items-center md:items-start xl:items-start">
+          <p className="text-[#252B42] font-bold hidden sm:block md:block xl:block">
+            ABOUT COMPANY
+          </p>
+          <h1 className="text-[#252B42] text-[40px] sm:text-[40px] md:text-[40px] xl:text-[58px] font-bold pt-8">
             ABOUT US
           </h1>
-          <p className="text-[#737373] pt-8">
+          <p className="text-[#737373] text-xl pt-8">
             We know how large objects will act, but things on a small scale
           </p>
           <div>
@@ -35,14 +37,16 @@ const AboutPage = () => {
             />
           </div>
         </div>
-        <div className="flex w-1/2 justify-end">
+        <div className="flex justify-end">
           <img src={img1} alt="img1" />
         </div>
       </div>
       <div className="flex flex-col px-[12%] pb-12">
-        <p className="text-[#E74040] text-sm pt-12">Problems trying</p>
-        <div className="flex gap-8">
-          <p className="text-[#252B42] text-2xl font-bold pt-6">
+        <p className="flex justify-center xl:justify-start text-[#E74040] text-sm pt-12">
+          Problems trying
+        </p>
+        <div className="flex flex-col xl:flex-row gap-8">
+          <p className="text-[#252B42] text-2xl font-bold pt-6 text-center xl:text-start">
             Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           </p>
           <p className="text-[#737373] text-sm pt-6">
@@ -51,16 +55,16 @@ const AboutPage = () => {
           </p>
         </div>
       </div>
-      <div className="flex pt-20 pb-20 justify-evenly">
-        <div className="flex flex-col text-center">
+      <div className="flex pt-20 pb-20 justify-evenly flex-col xl:flex-row">
+        <div className="flex flex-col text-center pb-16 xl:pb-0">
           <p className="text-[#252B42] text-[58px] font-bold">15K</p>
           <p className="text-[#737373] font-bold">Happy Customers</p>
         </div>
-        <div className="flex flex-col text-center">
+        <div className="flex flex-col text-center pb-16 xl:pb-0">
           <p className="text-[#252B42] text-[58px] font-bold">150K</p>
           <p className="text-[#737373] font-bold">Monthly Visitors</p>
         </div>
-        <div className="flex flex-col text-center">
+        <div className="flex flex-col text-center pb-16 xl:pb-0">
           <p className="text-[#252B42] text-[58px] font-bold">15</p>
           <p className="text-[#737373] font-bold">Countries Worldwide</p>
         </div>
@@ -70,16 +74,20 @@ const AboutPage = () => {
         </div>
       </div>
       <div className="relative flex justify-center py-28">
-        <img src={img2} alt="img2" className="rounded-3xl" />
+        <img
+          src={img2}
+          alt="img2"
+          className="rounded-3xl w-[307px] xl:w-auto h-[307px] xl:h-auto"
+        />
         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2">
           <img
             src={svg2}
             alt="svg2"
-            className="cursor-pointer pt-8 hover:scale-110 transition duration-150"
+            className="cursor-pointer pt-8 hover:scale-110 transition duration-150 w-[80px] xl:w-full h-[80px] xl:h-full"
           />
         </div>
       </div>
-      <div className="flex flex-col items-center pt-[110px] pb-[145px]">
+      <div className="flex flex-col items-center text-center pt-[110px] pb-12 xl:pb-[145px] px-[15%] xl:px-0">
         <h2 className="text-[#252B42] text-[40px] font-bold">Meet Our Team</h2>
         <p className="text-[#737373] text-sm pt-[12px]">
           Problems trying to resolve the conflict between the two major realms
@@ -87,8 +95,8 @@ const AboutPage = () => {
         </p>
         <TeamCard />
       </div>
-      <div>
-        <div className="flex flex-col items-center">
+      <div className="bg-[#FAFAFA]">
+        <div className="flex flex-col items-center text-center px-[15%] xl:px-0">
           <h2 className="text-[#252B42] text-[40px] font-bold pt-[75px]">
             Big Companies Are Here
           </h2>
@@ -97,7 +105,7 @@ const AboutPage = () => {
             of Classical physics: Newtonian mechanics
           </p>
         </div>
-        <div className="flex pt-[72px] pb-32 items-center justify-evenly">
+        <div className="flex pt-[72px] pb-32 items-center justify-evenly flex-col xl:flex-row gap-[43px] xl:gap-0">
           <div>
             <img
               src={svg3}
@@ -142,7 +150,7 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#2A7CC7] flex">
+      <div className="bg-[#2A7CC7] flex py-16 xl:py-0 text-center xl:text-start">
         <div className="flex flex-col justify-center px-[10%]">
           <p className="text-white font-bold">WORK WITH US</p>
           <h2 className="text-white text-[40px] font-bold pt-[20px]">
@@ -157,7 +165,7 @@ const AboutPage = () => {
           </div>
         </div>
         <div>
-          <img src={img3} alt="img3" className="" />
+          <img src={img3} alt="img3" className="hidden xl:block" />
         </div>
       </div>
       <Footer />
