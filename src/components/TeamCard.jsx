@@ -10,7 +10,7 @@ import img3 from "../assets/team-1-user-3.jpg";
 
 const TeamCard = () => {
   return (
-    <main className="flex items-center gap-8 pt-28">
+    <main className="flex items-center gap-8 pt-8 xl:pt-28 flex-col xl:flex-row">
       <div className="hover:scale-110 transition duration-300">
         <div>
           <img src={img1} alt="img1" className="cursor-pointer" />
