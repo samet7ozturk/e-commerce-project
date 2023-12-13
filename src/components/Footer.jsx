@@ -8,7 +8,7 @@ import {
 const Footer = () => {
   return (
     <main className="">
-      <div className="bg-[#FAFAFA] h-[142px] px-[12%] flex justify-between">
+      <div className="bg-[#FAFAFA] h-[142px] px-[12%] flex justify-evenly xl:justify-between flex-col xl:flex-row">
         <h2 className="flex items-center text-[#252B42] text-2xl font-bold">
           Bandage
         </h2>
@@ -36,7 +36,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="h-[272px] px-[12%] flex justify-between pt-14">
+      <div className="h-[1071px] xl:h-[272px] px-[12%] flex justify-between pt-14 pb-14 xl:pb-0 flex-col xl:flex-row">
         <div>
           <p className="text-[#252B42] font-bold pb-6">Company Info</p>
           <div>
@@ -102,7 +102,7 @@ const Footer = () => {
           <p className="text-[#737373] text-xs">Lore imp sum dolor Amit</p>
         </div>
       </div>
-      <div className="bg-[#FAFAFA] h-[74px] flex justify-between">
+      <div className="bg-[#FAFAFA] h-[98px] xl:h-[74px] flex">
         <p className="px-[12%] flex items-center text-[#737373] text-sm font-bold">
           Made With Love By Finland All Right Reserved
         </p>
