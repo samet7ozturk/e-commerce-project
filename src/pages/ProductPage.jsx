@@ -22,17 +22,17 @@ const ProductPage = () => {
   return (
     <main className=" font-montserrat">
       <Header />
-      <div className="bg-[#FAFAFA]">
-        <div className="flex gap-4 px-[10%] h-[92px] items-center">
+      <div className="bg-[#FAFAFA] pb-10">
+        <div className="flex gap-4 px-[10%] h-[92px] items-center justify-center xl:justify-start">
           <p className="text-[#252B42] text-sm font-bold">Home</p>
           <img src={svg1} alt="svg1" />
           <p className="text-[#BDBDBD] text-sm font-bold">Shop</p>
         </div>
-        <div className="flex px-[10%] gap-4">
-          <div className="flex w-1/2">
+        <div className="flex px-[10%] gap-4 flex-col xl:flex-row">
+          <div className="flex w-full xl:w1/2">
             <img src={img1} alt="img1" />
           </div>
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-full xl:w1/2">
             <h2 className="text-[#252B42] text-xl pt-4">Floating Phone</h2>
             <div className="pt-[13px]">
               <img src={svg2} alt="svg2" className="cursor-pointer" />
@@ -63,24 +63,48 @@ const ProductPage = () => {
       </div>
       <ProductDescription />
       <BestSellerProduct />
-      <div className="flex px-[5%] h-[175px] items-center justify-evenly">
+      <div className="flex pt-[72px] pb-32 items-center justify-evenly flex-col xl:flex-row gap-[43px] xl:gap-0">
         <div>
-          <img src={svg8} alt="svg8" className="cursor-pointer" />
+          <img
+            src={svg8}
+            alt="svg8"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
         <div>
-          <img src={svg9} alt="svg9" className="cursor-pointer" />
+          <img
+            src={svg9}
+            alt="svg9"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
         <div>
-          <img src={svg10} alt="svg10" className="cursor-pointer" />
+          <img
+            src={svg10}
+            alt="svg10"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
         <div>
-          <img src={svg11} alt="svg11" className="cursor-pointer" />
+          <img
+            src={svg11}
+            alt="svg11"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
         <div>
-          <img src={svg12} alt="svg12" className="cursor-pointer" />
+          <img
+            src={svg12}
+            alt="svg12"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
         <div>
-          <img src={svg13} alt="svg13" className="cursor-pointer" />
+          <img
+            src={svg13}
+            alt="svg13"
+            className="cursor-pointer  hover:drop-shadow-xl hover:scale-105"
+          />
         </div>
       </div>
       <Footer />
