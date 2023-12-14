@@ -7,12 +7,15 @@ import AboutPage from "../pages/AboutPage";
 import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
 import SignUpPage from "../pages/SignUpPage";
+import ProductListPage from "../pages/ProductListPage";
 
 const PageContent = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/product-list-page" element={<ProductListPage />} />
 
         <Route path="/product-page" element={<ProductPage />} />
 
