@@ -23,10 +23,10 @@ const ContactPage = () => {
   return (
     <main className=" font-montserrat">
       <Header />
-      <div className="flex px-[10%]">
-        <div className="flex flex-col w-1/2 justify-center px-[4%]">
+      <div className="flex flex-wrap xl:flex-nowrap px-[10%]">
+        <div className="flex flex-col justify-center text-center xl:text-start px-[4%]">
           <p className="text-[#252B42] font-bold">CONTACT US</p>
-          <h1 className="text-[#252B42] text-[58px] font-bold pt-8">
+          <h1 className="text-[#252B42] text-[40px] xl:text-[58px] font-bold pt-8">
             Get in touch today!
           </h1>
           <p className="text-[#737373] pt-8">
@@ -38,7 +38,7 @@ const ContactPage = () => {
           <p className="text-[#252B42] text-2xl font-bold pt-[21px]">
             Fax : +451 215 215
           </p>
-          <div className="flex items-center gap-4 text-[#252B42] pt-10">
+          <div className="flex items-center gap-4 text-[#252B42] pt-10 justify-center xl:justify-start">
             <a
               href="https://twitter.com/"
               target="_blank"
@@ -70,19 +70,19 @@ const ContactPage = () => {
             </a>
           </div>
         </div>
-        <div className="flex w-1/2 justify-end">
+        <div className="flex justify-end pt-16 xl:pt-0">
           <img src={img1} alt="img1" />
         </div>
       </div>
-      <div className="px-[10%]">
+      <div className="px-[10%] bg-[#FAFAFA] xl:bg-white pt-14 xl:pt-20 pb-[70px] xl:pb-0">
         <div className="flex flex-col items-center">
           <p className="text-[#252B42] font-bold">VISIT OUR OFFICE</p>
-          <h1 className="text-[#252B42] text-[58px] font-bold pt-8">
+          <h1 className="text-[#252B42] text-[40px] xl:text-[58px] font-bold pt-8">
             We help small businesses with big ideas
           </h1>
         </div>
-        <div className="flex justify-center">
-          <div className="flex flex-col items-center py-16 w-[328px]">
+        <div className="flex justify-center flex-col xl:flex-row">
+          <div className="flex flex-col items-center py-16 w-[328px] bg-white">
             <FontAwesomeIcon
               icon={faPhone}
               className="w-[72px] h-[72px] text-[#23A6F0]"
@@ -110,7 +110,7 @@ const ContactPage = () => {
             <p className="text-white font-bold pt-4">Get Support</p>
             <img src={svg1} alt="svg1" className="pt-4" />
           </div>
-          <div className="flex flex-col items-center py-16 w-[328px]">
+          <div className="flex flex-col items-center py-16 w-[328px] bg-white">
             <FontAwesomeIcon
               icon={faEnvelope}
               className="w-[72px] h-[72px] text-[#23A6F0]"
