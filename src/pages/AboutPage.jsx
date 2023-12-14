@@ -151,7 +151,7 @@ const AboutPage = () => {
         </div>
       </div>
       <div className="bg-[#2A7CC7] flex py-16 xl:py-0 text-center xl:text-start">
-        <div className="flex flex-col justify-center px-[10%]">
+        <div className="flex flex-col justify-center px-[10%] items-center xl:items-start">
           <p className="text-white font-bold">WORK WITH US</p>
           <h2 className="text-white text-[40px] font-bold pt-[20px]">
             Now Let’s grow Yours
