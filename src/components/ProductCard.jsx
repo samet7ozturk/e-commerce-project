@@ -3,7 +3,7 @@ import svg from "../assets/product-colors.svg";
 const ProductCard = () => {
   return (
     <main className="flex flex-col items-center pb-12">
-      <h2 className="text-[#252B42] text-base leading-3 font-bold pt-8 pb-4">
+      <h2 className="text-[#252B42] text-base font-bold pt-8 pb-4">
         Graphic Design
       </h2>
       <p className="text-[#737373] text-sm font-bold pb-4">
