@@ -14,15 +14,6 @@ import img8 from "../assets/bestseller-products-8.png";
 const BestSellerProduct = () => {
   return (
     <main className="flex flex-col px-[10%]">
-      <div className="flex flex-col items-center pt-24 pb-6">
-        <p className="text-[#737373] text-xl pb-2">Featured Products</p>
-        <h2 className="text-[#252B42] text-2xl font-bold pb-2">
-          BESTSELLER PRODUCTS
-        </h2>
-        <p className="text-[#737373] text-sm">
-          Problems trying to resolve the conflict between
-        </p>
-      </div>
       <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 pt-14 pb-20">
         <Link
           to="/product-page"
