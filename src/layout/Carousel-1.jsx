@@ -29,7 +29,7 @@ export function Carousel1() {
             <Typography variant="lead" color="white" className="mb-12 text-xl">
               We know how large objects will act, but things on a small scale.
             </Typography>
-            <div className="bg-[#2DC071] w-[221px] h-[61px] cursor-pointer flex justify-center gap-2 rounded-md">
+            <div className="bg-[#2DC071] w-[221px] h-[61px] cursor-pointer flex justify-center gap-2 rounded-md hover:scale-110 transition duration-200">
               <p className="flex text-white text-2xl font-bold items-center">
                 SHOP NOW
               </p>
