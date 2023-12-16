@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -9,10 +9,13 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
   console.log(errors);
+
+  const watchPassword = watch("password", "");
 
   const validatePassword = (value) => {
     // En az 1 tane sayı kontrolü
@@ -29,8 +32,6 @@ const SignUpPage = () => {
     return true;
   };
 
-  const watchPassword = watch("password", "");
-
   const validatePasswordMatch = (value) => {
     const password = watchPassword;
     return value === password || "Şifreler eşleşmiyor.";
@@ -46,11 +47,15 @@ const SignUpPage = () => {
       });
   };
 
+  const handleRoleChange = (e) => {
+    setValue("role_id", e.target.value);
+  };
+
   return (
     <div>
       <Header />
       <div className="flex flex-col items-center py-12">
-        <h1 className="text-[#252B42] text-3xl font-bold">Üye Ol</h1>
+        <h1 className="text-[#252B42] text-3xl font-bold">Sign Up</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="flex flex-col gap-2 pt-4">
@@ -59,6 +64,10 @@ const SignUpPage = () => {
                 type="text"
                 {...register("name", {
                   required: "Girilmesi zorunlu alan!",
+                  minLength: {
+                    value: 3,
+                    message: "En az 3 karakter girmelisiniz!",
+                  },
                 })}
                 placeholder="Name"
                 className="border-2 border-[#23A6F0] w-64 h-8"
@@ -82,7 +91,7 @@ const SignUpPage = () => {
           </div>
           <div>
             <label className="flex flex-col gap-2 pt-4">
-              <p>PASSWORD</p>
+              <p>Password</p>
               <input
                 type="password"
                 {...register("password", {
@@ -114,16 +123,98 @@ const SignUpPage = () => {
               <p>{errors.confirmPassword?.message}</p>
             </label>
           </div>
-          <select
-            {...register("gender", {
-              required: "Seçilmesi zorunlu alan!",
-            })}
-            className="mt-4"
-          >
-            <option value="male">male</option>
-            <option value="female">female</option>
-            <p>{errors.gender?.message}</p>
-          </select>
+          <div>
+            <label className="flex flex-col gap-2 pt-4">
+              <p>Role</p>
+              <select
+                {...register("role_id", {
+                  required: "Seçilmesi zorunlu alan!",
+                })}
+                onChange={handleRoleChange}
+                className="border-2 border-[#23A6F0] w-64 h-8"
+              >
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+                <option value="store">Store</option>
+              </select>
+              <p>{errors.role_id?.message}</p>
+            </label>
+          </div>
+          {watch("role_id") === "store" && (
+            <>
+              <div>
+                <label className="flex flex-col gap-2 pt-4">
+                  <p>Store Name</p>
+                  <input
+                    type="text"
+                    {...register("store.name", {
+                      required: "Girilmesi zorunlu alan!",
+                      minLength: {
+                        value: 3,
+                        message: "En az 3 karakter girmelisiniz!",
+                      },
+                    })}
+                    placeholder="Store Name"
+                    className="border-2 border-[#23A6F0] w-64 h-8"
+                  />
+                  <p>{errors.store?.name?.message}</p>
+                </label>
+              </div>
+              <div>
+                <label className="flex flex-col gap-2 pt-4">
+                  <p>Store Phone</p>
+                  <input
+                    type="tel"
+                    {...register("store.phone", {
+                      required: "Girilmesi zorunlu alan!",
+                      pattern: {
+                        value: /^[0-9]{10}$/,
+                        message: "Geçerli bir telefon numarası giriniz!",
+                      },
+                    })}
+                    placeholder="Store Phone"
+                    className="border-2 border-[#23A6F0] w-64 h-8"
+                  />
+                  <p>{errors.store?.phone?.message}</p>
+                </label>
+              </div>
+              <div>
+                <label className="flex flex-col gap-2 pt-4">
+                  <p>Store Tax ID</p>
+                  <input
+                    type="text"
+                    {...register("store.tax_no", {
+                      required: "Girilmesi zorunlu alan!",
+                      pattern: {
+                        value: /^T\d{4}V\d{6}$/,
+                        message:
+                          "Geçerli bir vergi numarası giriniz (TXXXXVXXXXXX)!",
+                      },
+                    })}
+                    placeholder="Store Tax ID"
+                    className="border-2 border-[#23A6F0] w-64 h-8"
+                  />
+                  <p>{errors.store?.tax_no?.message}</p>
+                </label>
+              </div>
+              <div>
+                <label className="flex flex-col gap-2 pt-4">
+                  <p>Store Bank Account</p>
+                  <input
+                    type="text"
+                    {...register("store.bank_account", {
+                      required: "Girilmesi zorunlu alan!",
+                      // Burada uygun bir IBAN validasyonu kullanmanız gerekebilir.
+                    })}
+                    placeholder="Store Bank Account"
+                    className="border-2 border-[#23A6F0] w-64 h-8"
+                  />
+                  <p>{errors.store?.bank_account?.message}</p>
+                </label>
+              </div>
+            </>
+          )}
+
           <div className="pt-10">
             <button
               className="border-2 border-[#23A6F0] rounded-md w-20 h-10"
