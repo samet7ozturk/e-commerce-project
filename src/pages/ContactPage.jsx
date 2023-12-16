@@ -94,7 +94,11 @@ const ContactPage = () => {
               georgia.young@ple.com
             </p>
             <p className="text-[#252B42] font-bold pt-4">Get Support</p>
-            <img src={svg1} alt="svg1" className="pt-4" />
+            <img
+              src={svg1}
+              alt="svg1"
+              className="pt-4 cursor-pointer hover:scale-110 transition duration-200"
+            />
           </div>
           <div className="flex flex-col items-center py-16 w-[328px] bg-[#252B42]">
             <FontAwesomeIcon
@@ -108,7 +112,11 @@ const ContactPage = () => {
               georgia.young@ple.com
             </p>
             <p className="text-white font-bold pt-4">Get Support</p>
-            <img src={svg1} alt="svg1" className="pt-4" />
+            <img
+              src={svg1}
+              alt="svg1"
+              className="pt-4 cursor-pointer hover:scale-110 transition duration-200"
+            />
           </div>
           <div className="flex flex-col items-center py-16 w-[328px] bg-white">
             <FontAwesomeIcon
@@ -122,7 +130,11 @@ const ContactPage = () => {
               georgia.young@ple.com
             </p>
             <p className="text-[#252B42] font-bold pt-4">Get Support</p>
-            <img src={svg1} alt="svg1" className="pt-4" />
+            <img
+              src={svg1}
+              alt="svg1"
+              className="pt-4 cursor-pointer hover:scale-110 transition duration-200"
+            />
           </div>
         </div>
       </div>
@@ -132,7 +144,11 @@ const ContactPage = () => {
           WE Can't WAIT TO MEET YOU
         </p>
         <p className="text-[#252B42] text-[58px] font-bold pt-2">Let’s Talk</p>
-        <img src={svg3} alt="svg3" className="pt-2" />
+        <img
+          src={svg3}
+          alt="svg3"
+          className="pt-2 cursor-pointer hover:scale-110 transition duration-200"
+        />
       </div>
       <Footer />
     </main>
