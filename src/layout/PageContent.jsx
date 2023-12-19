@@ -8,6 +8,7 @@ import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
 import SignUpPage from "../pages/SignUpPage";
 import ProductListPage from "../pages/ProductListPage";
+import LoginPage from "../pages/LoginPage";
 
 const PageContent = () => {
   return (
@@ -26,6 +27,8 @@ const PageContent = () => {
         <Route path="/contact-page" element={<ContactPage />} />
 
         <Route path="/signup-page" element={<SignUpPage />} />
+
+        <Route path="/login" element={<LoginPage />} />
 
         <Route path="*" element={<h1>404 Not Found Page</h1>} />
       </Routes>
