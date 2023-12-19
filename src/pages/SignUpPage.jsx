@@ -54,10 +54,13 @@ const SignUpPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center py-12">
-        <h1 className="text-[#252B42] text-3xl font-bold">Sign Up</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
+      <div className="flex flex-col items-center py-12 bg-[url(https://previews.123rf.com/images/annaleni/annaleni1510/annaleni151000066/46604184-thin-line-retail-e-commerce-online-business-seamless-blue-pattern-vector-shopping-and-marketplace.jpg)] bg-opacity-10">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="backdrop-blur-sm w-[600px] rounded-xl flex flex-col justify-center items-center text-xl shadow-xl animate-fade-down animate-once animate-ease-in-out py-6"
+        >
+          <h1 className="text-4xl font-bold pb-8">Sign Up</h1>
+          <div className="flex gap-6">
             <label className="flex flex-col gap-2 pt-4">
               <p>Name</p>
               <input
@@ -69,13 +72,12 @@ const SignUpPage = () => {
                     message: "En az 3 karakter girmelisiniz!",
                   },
                 })}
-                placeholder="Name"
-                className="border-2 border-[#23A6F0] w-64 h-8"
+                placeholder=" Name"
+                className="bg-blue-100 rounded-md h-10"
               />
               <p>{errors.name?.message}</p>
             </label>
-          </div>
-          <div>
+
             <label className="flex flex-col gap-2 pt-4">
               <p>Email</p>
               <input
@@ -83,13 +85,13 @@ const SignUpPage = () => {
                 {...register("email", {
                   required: "Girilmesi zorunlu alan!",
                 })}
-                placeholder="Email"
-                className="border-2 border-[#23A6F0] w-64 h-8"
+                placeholder=" Email"
+                className="bg-blue-100 rounded-md h-10"
               />
               <p>{errors.email?.message}</p>
             </label>
           </div>
-          <div>
+          <div className="flex gap-6">
             <label className="flex flex-col gap-2 pt-4">
               <p>Password</p>
               <input
@@ -102,13 +104,12 @@ const SignUpPage = () => {
                   },
                   validate: validatePassword,
                 })}
-                placeholder="First Name"
-                className="border-2 border-[#23A6F0] w-64 h-8"
+                placeholder=" Password"
+                className="bg-blue-100 rounded-md h-10"
               />
               <p>{errors.password?.message}</p>
             </label>
-          </div>
-          <div>
+
             <label className="flex flex-col gap-2 pt-4">
               <p>Confirm Password</p>
               <input
@@ -117,13 +118,13 @@ const SignUpPage = () => {
                   required: "Girilmesi zorunlu alan!",
                   validate: validatePasswordMatch,
                 })}
-                placeholder="Confirm Password"
-                className="border-2 border-[#23A6F0] w-64 h-8"
+                placeholder=" Confirm Password"
+                className="bg-blue-100 rounded-md h-10"
               />
               <p>{errors.confirmPassword?.message}</p>
             </label>
           </div>
-          <div>
+          <div className="flex w-[526px]">
             <label className="flex flex-col gap-2 pt-4">
               <p>Role</p>
               <select
@@ -131,7 +132,7 @@ const SignUpPage = () => {
                   required: "Seçilmesi zorunlu alan!",
                 })}
                 onChange={handleRoleChange}
-                className="border-2 border-[#23A6F0] w-64 h-8"
+                className="bg-blue-100 rounded-md h-10"
               >
                 <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
@@ -141,8 +142,8 @@ const SignUpPage = () => {
             </label>
           </div>
           {watch("role_id") === "store" && (
-            <>
-              <div>
+            <div>
+              <div className="flex gap-6">
                 <label className="flex flex-col gap-2 pt-4">
                   <p>Store Name</p>
                   <input
@@ -154,13 +155,12 @@ const SignUpPage = () => {
                         message: "En az 3 karakter girmelisiniz!",
                       },
                     })}
-                    placeholder="Store Name"
-                    className="border-2 border-[#23A6F0] w-64 h-8"
+                    placeholder=" Store Name"
+                    className="bg-blue-100 rounded-md h-10"
                   />
                   <p>{errors.store?.name?.message}</p>
                 </label>
-              </div>
-              <div>
+
                 <label className="flex flex-col gap-2 pt-4">
                   <p>Store Phone</p>
                   <input
@@ -172,8 +172,8 @@ const SignUpPage = () => {
                         message: "Geçerli bir telefon numarası giriniz!",
                       },
                     })}
-                    placeholder="Store Phone"
-                    className="border-2 border-[#23A6F0] w-64 h-8"
+                    placeholder=" Store Phone"
+                    className="bg-blue-100 rounded-md h-10"
                   />
                   <p>{errors.store?.phone?.message}</p>
                 </label>
@@ -191,8 +191,8 @@ const SignUpPage = () => {
                           "Geçerli bir vergi numarası giriniz (TXXXXVXXXXXX)!",
                       },
                     })}
-                    placeholder="Store Tax ID"
-                    className="border-2 border-[#23A6F0] w-64 h-8"
+                    placeholder=" Store Tax ID"
+                    className="bg-blue-100 rounded-md h-10"
                   />
                   <p>{errors.store?.tax_no?.message}</p>
                 </label>
@@ -204,23 +204,22 @@ const SignUpPage = () => {
                     type="text"
                     {...register("store.bank_account", {
                       required: "Girilmesi zorunlu alan!",
-                      // Burada uygun bir IBAN validasyonu kullanmanız gerekebilir.
                     })}
-                    placeholder="Store Bank Account"
-                    className="border-2 border-[#23A6F0] w-64 h-8"
+                    placeholder=" Store Bank Account"
+                    className="bg-blue-100 rounded-md h-10"
                   />
                   <p>{errors.store?.bank_account?.message}</p>
                 </label>
               </div>
-            </>
+            </div>
           )}
 
           <div className="pt-10">
             <button
-              className="border-2 border-[#23A6F0] rounded-md w-20 h-10"
+              className="bg-blue-100 font-semibold w-36 h-12 rounded-lg my-6 hover:animate-wiggle-more hover:animate-infinite"
               type="submit"
             >
-              SUBMIT
+              REGISTER
             </button>
           </div>
         </form>
