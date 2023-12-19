@@ -34,7 +34,7 @@ const LoginForm = () => {
               required: "Email is required",
               pattern: /^\S+@\S+$/i,
             })}
-            placeholder="Email"
+            placeholder=" Email"
             className="bg-blue-100 rounded-md h-10"
           />
           {errors.email && <p>{errors.email.message}</p>}
@@ -44,7 +44,7 @@ const LoginForm = () => {
           <label>Password</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder=" Password"
             {...register("password", { required: "Password is required" })}
             className="bg-blue-100 rounded-md h-10"
           />
@@ -60,7 +60,7 @@ const LoginForm = () => {
           type="submit"
           className="bg-blue-100 w-24 h-10 rounded-lg my-6 hover:animate-wiggle-more hover:animate-infinite"
         >
-          Submit
+          Log In
         </button>
         <div className="flex gap-2">
           <p className="text-base">Don't have an account?</p>
