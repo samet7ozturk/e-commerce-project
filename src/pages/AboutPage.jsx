@@ -105,48 +105,94 @@ const AboutPage = () => {
             of Classical physics: Newtonian mechanics
           </p>
         </div>
-        <div className="flex pt-[72px] pb-32 items-center justify-evenly flex-col xl:flex-row gap-[43px] xl:gap-0">
-          <div>
-            <img
-              src={svg3}
-              alt="svg3"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
+        <div className="relative flex overflow-x-hidden px-[10%]">
+          <div className="flex py-12 animate-marquee whitespace-nowrap">
+            <div>
+              <img
+                src={svg3}
+                alt="svg3"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg4}
+                alt="svg4"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg5}
+                alt="svg5"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg6}
+                alt="svg6"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg7}
+                alt="svg7"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg8}
+                alt="svg8"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
           </div>
-          <div>
-            <img
-              src={svg4}
-              alt="svg4"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
-          </div>
-          <div>
-            <img
-              src={svg5}
-              alt="svg5"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
-          </div>
-          <div>
-            <img
-              src={svg6}
-              alt="svg6"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
-          </div>
-          <div>
-            <img
-              src={svg7}
-              alt="svg7"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
-          </div>
-          <div>
-            <img
-              src={svg8}
-              alt="svg8"
-              className="cursor-pointer hover:drop-shadow-xl hover:scale-105"
-            />
+          <div className="flex absolute top-0 py-12 animate-marquee2 whitespace-nowrap">
+            <div>
+              <img
+                src={svg3}
+                alt="svg3"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg4}
+                alt="svg4"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg5}
+                alt="svg5"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg6}
+                alt="svg6"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg7}
+                alt="svg7"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
+            <div>
+              <img
+                src={svg8}
+                alt="svg8"
+                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+              />
+            </div>
           </div>
         </div>
       </div>
