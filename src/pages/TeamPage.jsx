@@ -12,6 +12,11 @@ import img2 from "../assets/team-page-2.png";
 import img3 from "../assets/team-page-3.png";
 import img4 from "../assets/team-page-4.png";
 import img5 from "../assets/team-page-5.png";
+import img6 from "../assets/team-page-1-m.png";
+import img7 from "../assets/team-page-2-m.png";
+import img8 from "../assets/team-page-3-m.png";
+import img9 from "../assets/team-page-4-m.png";
+import img10 from "../assets/team-page-5-m.png";
 import TeamCard from "../components/TeamCard";
 
 const TeamPage = () => {
@@ -20,24 +25,61 @@ const TeamPage = () => {
       <Header />
       <div className="flex flex-col items-center ">
         <p className="text-[#737373] font-bold pt-14">WHAT WE DO</p>
-        <p className="text-[#252B42] text-[58px] font-bold pt-[12px]">
+        <div className="text-[#252B42] text-[40px] xl:text-[58px] font-bold pt-[12px] text-center">
           Innovation tailored for you
-        </p>
+        </div>
         <div className="flex flex-row gap-4 pt-6 pb-16">
           <p className="text-[#252B42] text-sm font-bold">Home</p>
           <img src={svg1} alt="svg1" />
           <p className="text-[#BDBDBD] text-sm font-bold">Shop</p>
         </div>
       </div>
-      <div className="flex gap-2">
-        <img src={img1} alt="img1" className="cursor-pointer" />
-        <div className="flex flex-col gap-2">
-          <img src={img2} alt="img2" className="cursor-pointer" />
-          <img src={img3} alt="img3" className="cursor-pointer" />
+      <div className="flex flex-col xl:flex-row gap-2">
+        <img src={img1} alt="img1" className="cursor-pointer hidden xl:block" />
+        <img src={img6} alt="img6" className="cursor-pointer block xl:hidden" />
+        <div className="flex flex-row xl:flex-col gap-2">
+          <img
+            src={img2}
+            alt="img2"
+            className="cursor-pointer hidden xl:block"
+          />
+          <img
+            src={img7}
+            alt="img7"
+            className="cursor-pointer block xl:hidden"
+          />
+          <img
+            src={img3}
+            alt="img3"
+            className="cursor-pointer hidden xl:block"
+          />
+          <img
+            src={img8}
+            alt="img8"
+            className="cursor-pointer block xl:hidden"
+          />
         </div>
-        <div className="flex flex-col gap-2">
-          <img src={img4} alt="img4" className="cursor-pointer" />
-          <img src={img5} alt="img5" className="cursor-pointer" />
+        <div className="flex flex-row xl:flex-col gap-2">
+          <img
+            src={img4}
+            alt="img4"
+            className="cursor-pointer hidden xl:block"
+          />
+          <img
+            src={img9}
+            alt="img9"
+            className="cursor-pointer block xl:hidden"
+          />
+          <img
+            src={img5}
+            alt="img5"
+            className="cursor-pointer hidden xl:block"
+          />
+          <img
+            src={img10}
+            alt="img10"
+            className="cursor-pointer block xl:hidden"
+          />
         </div>
       </div>
       <div className="flex flex-col items-center pt-28 pb-[137px]">
@@ -46,7 +88,7 @@ const TeamPage = () => {
         <TeamCard />
         <TeamCard />
       </div>
-      <div className="flex flex-col items-center pt-20 pb-[90px]">
+      <div className="flex flex-col items-center pt-20 pb-[90px] text-center px-[10%] xl:px-0">
         <h2 className="text-[#252B42] text-[40px] font-bold">
           Start your 14 days free trial
         </h2>
