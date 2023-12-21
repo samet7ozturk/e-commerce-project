@@ -10,9 +10,9 @@ export function Carousel2() {
         <img
           src={img1}
           alt="image 1"
-          className="h-[calc(100vh_-_134px)] w-full object-cover"
+          className="h-[750px] xl:h-[calc(100vh_-_134px)] w-full object-cover"
         />
-        <div className="absolute -left-0 xl:-left-[10%] inset-0 grid h-full w-full place-items-center">
+        <div className="absolute -top-[124px] xl:top-0 -left-0 xl:-left-[10%] inset-0 grid h-full w-full place-items-center">
           <div className="w-3/5 text-center xl:text-start xl:w-2/4">
             <Typography
               variant="lead"
@@ -50,7 +50,7 @@ export function Carousel2() {
           <img
             src={img3}
             alt="img3"
-            className="absolute top-[17%] left-[60%]"
+            className="bg-[#23856D] flex xl:absolute top-[28.3%] xl:top-[16.9%] left-[60%]"
           />
         </div>
       </div>
