@@ -5,7 +5,7 @@ export const login = (credentials) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://workinteck-fe-final.onrender.com/login",
+        "https://workintech-fe-ecommerce.onrender.com/login",
         credentials
       );
 
