@@ -17,6 +17,11 @@ import img2 from "../assets/product-list-page-2.png";
 import img3 from "../assets/product-list-page-3.png";
 import img4 from "../assets/product-list-page-4.png";
 import img5 from "../assets/product-list-page-5.png";
+import img6 from "../assets/product-list-page-1-m.png";
+import img7 from "../assets/product-list-page-2-m.png";
+import img8 from "../assets/product-list-page-3-m.png";
+import img9 from "../assets/product-list-page-4-m.png";
+import img10 from "../assets/product-list-page-5-m.png";
 
 const ProductListPage = () => {
   return (
@@ -31,31 +36,86 @@ const ProductListPage = () => {
         </div>
       </div>
       <div className="bg-[#FAFAFA] flex gap-2 justify-center flex-col xl:flex-row pb-8">
-        <img
-          src={img1}
-          alt="img1"
-          className="cursor-pointer hover:scale-105 duration-200 transition opacity-100 hover:opacity-60"
-        />
-        <img
-          src={img2}
-          alt="img2"
-          className="cursor-pointer hover:scale-105 duration-200 transition opacity-100 hover:opacity-60"
-        />
-        <img
-          src={img3}
-          alt="img3"
-          className="cursor-pointer hover:scale-105 duration-200 transition opacity-100 hover:opacity-60"
-        />
-        <img
-          src={img4}
-          alt="img4"
-          className="cursor-pointer hover:scale-105 duration-200 transition opacity-100 hover:opacity-60"
-        />
-        <img
-          src={img5}
-          alt="img5"
-          className="cursor-pointer hover:scale-105 duration-200 transition opacity-100 hover:opacity-60"
-        />
+        <div className="flex relative hover:scale-105 justify-center">
+          <img
+            src={img1}
+            alt="img1"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
+          />
+          <img
+            src={img6}
+            alt="img6"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <p className="text-base font-bold">CLOTHS</p>
+            <p className="text-base font-normal">5 Items</p>
+          </div>
+        </div>
+        <div className="flex relative hover:scale-105 justify-center">
+          <img
+            src={img2}
+            alt="img2"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
+          />
+          <img
+            src={img7}
+            alt="img7"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <p className="text-base font-bold">CLOTHS</p>
+            <p className="text-base font-normal">5 Items</p>
+          </div>
+        </div>
+        <div className="flex relative hover:scale-105 justify-center">
+          <img
+            src={img3}
+            alt="img3"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
+          />
+          <img
+            src={img8}
+            alt="img8"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <p className="text-base font-bold">CLOTHS</p>
+            <p className="text-base font-normal">5 Items</p>
+          </div>
+        </div>
+        <div className="flex relative hover:scale-105 justify-center">
+          <img
+            src={img4}
+            alt="img4"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
+          />
+          <img
+            src={img9}
+            alt="img9"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <p className="text-base font-bold">CLOTHS</p>
+            <p className="text-base font-normal">5 Items</p>
+          </div>
+        </div>
+        <div className="flex relative hover:scale-105 justify-center">
+          <img
+            src={img5}
+            alt="img5"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
+          />
+          <img
+            src={img10}
+            alt="img10"
+            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
+          />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+            <p className="text-base font-bold">CLOTHS</p>
+            <p className="text-base font-normal">5 Items</p>
+          </div>
+        </div>
       </div>
       <div className="flex px-[10%] py-6 items-center justify-between flex-col xl:flex-row gap-4 xl:gap-0">
         <h2 className="text-[#737373] text-sm font-bold">
