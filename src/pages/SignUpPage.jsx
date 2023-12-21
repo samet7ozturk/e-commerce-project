@@ -16,6 +16,7 @@ const SignUpPage = () => {
   const history = useNavigate();
   const [roleOptions, setRoleOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [defaultRole, setDefaultRole] = useState("");
 
   console.log(errors);
   console.log(loading);
@@ -70,6 +71,9 @@ const SignUpPage = () => {
       .get("https://workintech-fe-ecommerce.onrender.com/roles")
       .then((response) => {
         setRoleOptions(response.data);
+        if (response.data.length > 0) {
+          setDefaultRole(response.data[2].id);
+        }
       })
       .catch((error) => {
         console.error("Role options request failed:", error);
@@ -157,6 +161,7 @@ const SignUpPage = () => {
                   required: "Seçilmesi zorunlu alan!",
                 })}
                 onChange={handleRoleChange}
+                value={defaultRole}
                 className="bg-blue-100 rounded-md h-10"
               >
                 {roleOptions.map((role) => (
