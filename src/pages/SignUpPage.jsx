@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -12,8 +13,12 @@ const SignUpPage = () => {
     setValue,
     formState: { errors },
   } = useForm();
+  const history = useNavigate();
+  const [roleOptions, setRoleOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   console.log(errors);
+  console.log(loading);
 
   const watchPassword = watch("password", "");
 
@@ -38,18 +43,38 @@ const SignUpPage = () => {
   };
 
   const onSubmit = (data) => {
-    console.log("data", data);
+    const { confirmPassword, ...postData } = data;
+    console.log("data", postData);
+    setLoading(true);
     axios
-      .post("https://workinteck-fe-final.onrender.com/signup", data)
+      .post("https://workintech-fe-ecommerce.onrender.com/signup", postData)
       .then((res) => {
-        console.log("post", res);
+        console.log("post", res.data);
         localStorage.setItem("token", res.data.token);
+        history("/");
+      })
+      .catch((error) => {
+        console.error("Post request failed:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   const handleRoleChange = (e) => {
     setValue("role_id", e.target.value);
   };
+
+  useEffect(() => {
+    axios
+      .get("https://workintech-fe-ecommerce.onrender.com/roles")
+      .then((response) => {
+        setRoleOptions(response.data);
+      })
+      .catch((error) => {
+        console.error("Role options request failed:", error);
+      });
+  }, []);
 
   return (
     <div>
@@ -134,14 +159,16 @@ const SignUpPage = () => {
                 onChange={handleRoleChange}
                 className="bg-blue-100 rounded-md h-10"
               >
-                <option value="customer">Customer</option>
-                <option value="admin">Admin</option>
-                <option value="store">Store</option>
+                {roleOptions.map((role) => (
+                  <option key={role.id} value={role.id}>
+                    {role.name}
+                  </option>
+                ))}
               </select>
               <p>{errors.role_id?.message}</p>
             </label>
           </div>
-          {watch("role_id") === "store" && (
+          {watch("role_id") === "2" && (
             <div>
               <div className="flex gap-6">
                 <label className="flex flex-col gap-2 pt-4">
@@ -216,10 +243,15 @@ const SignUpPage = () => {
 
           <div className="pt-10">
             <button
-              className="bg-blue-100 font-semibold w-36 h-12 rounded-lg my-6 hover:animate-wiggle-more hover:animate-infinite"
+              className={`bg-blue-100 font-semibold w-36 h-12 rounded-lg my-6 ${
+                loading
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:animate-wiggle-more hover:animate-twice"
+              }`}
               type="submit"
+              disabled={loading}
             >
-              REGISTER
+              {loading ? "Submitting..." : "REGISTER"}
             </button>
           </div>
         </form>
