@@ -111,42 +111,42 @@ const AboutPage = () => {
               <img
                 src={svg3}
                 alt="svg3"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg4}
                 alt="svg4"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg5}
                 alt="svg5"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg6}
                 alt="svg6"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg7}
                 alt="svg7"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg8}
                 alt="svg8"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
           </div>
@@ -155,42 +155,42 @@ const AboutPage = () => {
               <img
                 src={svg3}
                 alt="svg3"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg4}
                 alt="svg4"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg5}
                 alt="svg5"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg6}
                 alt="svg6"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg7}
                 alt="svg7"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
             <div>
               <img
                 src={svg8}
                 alt="svg8"
-                className="mx-1 cursor-pointer hover:drop-shadow-xl hover:scale-105"
+                className="mx-14 cursor-pointer hover:drop-shadow-xl hover:scale-105"
               />
             </div>
           </div>
