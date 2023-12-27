@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { login } from "../store/actions/thunkAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const {
@@ -11,10 +11,12 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       await dispatch(login(data));
+      history("/");
     } catch (error) {
       console.error("Login failed:", error.message);
     }
