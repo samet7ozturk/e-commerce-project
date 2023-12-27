@@ -16,6 +16,16 @@ const PageContent = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
+        <Route
+          path="/shopping/:category_id/:gender/:category"
+          element={<ProductListPage />}
+        />
+
+        <Route
+          path="/shopping/:gender/:category"
+          element={<ProductListPage />}
+        />
+
         <Route path="/product-list-page" element={<ProductListPage />} />
 
         <Route path="/product-page" element={<ProductPage />} />
