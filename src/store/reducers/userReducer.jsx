@@ -11,6 +11,8 @@ const userReducer = (state = initialState, action) => {
       };
     case "LOGIN_USER_FAILURE":
       return action.payload;
+    case "USER_EXIT":
+      return initialState;
     default:
       return state;
   }
