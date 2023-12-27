@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { instanceAxios } from "../api/api";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BestSellerProduct from "../layout/BestSellerProducts";
@@ -12,18 +15,21 @@ import svg7 from "../assets/vector.svg";
 import svg8 from "../assets/stripe.svg";
 import svg9 from "../assets/aws.svg";
 import svg10 from "../assets/reddit.svg";
-import img1 from "../assets/product-list-page-1.png";
-import img2 from "../assets/product-list-page-2.png";
-import img3 from "../assets/product-list-page-3.png";
-import img4 from "../assets/product-list-page-4.png";
-import img5 from "../assets/product-list-page-5.png";
-import img6 from "../assets/product-list-page-1-m.png";
-import img7 from "../assets/product-list-page-2-m.png";
-import img8 from "../assets/product-list-page-3-m.png";
-import img9 from "../assets/product-list-page-4-m.png";
-import img10 from "../assets/product-list-page-5-m.png";
+import { useDispatch, useSelector } from "react-redux";
+import { categories } from "../store/thunks/categoryThunk";
+import { Link } from "react-router-dom";
 
 const ProductListPage = () => {
+  const dispatch = useDispatch();
+  const data = useSelector((store) => store.global.categories);
+
+  useEffect(() => {
+    dispatch(categories());
+  }, []);
+
+  const sortedData = [...data].sort((a, b) => b.rating - a.rating);
+  const topCategories = sortedData.slice(0, 5);
+
   return (
     <main className=" font-montserrat">
       <Header />
@@ -36,86 +42,24 @@ const ProductListPage = () => {
         </div>
       </div>
       <div className="bg-[#FAFAFA] flex gap-2 justify-center flex-col xl:flex-row pb-8">
-        <div className="flex relative hover:scale-105 justify-center">
-          <img
-            src={img1}
-            alt="img1"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
-          />
-          <img
-            src={img6}
-            alt="img6"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-            <p className="text-base font-bold">CLOTHS</p>
-            <p className="text-base font-normal">5 Items</p>
-          </div>
-        </div>
-        <div className="flex relative hover:scale-105 justify-center">
-          <img
-            src={img2}
-            alt="img2"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
-          />
-          <img
-            src={img7}
-            alt="img7"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-            <p className="text-base font-bold">CLOTHS</p>
-            <p className="text-base font-normal">5 Items</p>
-          </div>
-        </div>
-        <div className="flex relative hover:scale-105 justify-center">
-          <img
-            src={img3}
-            alt="img3"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
-          />
-          <img
-            src={img8}
-            alt="img8"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-            <p className="text-base font-bold">CLOTHS</p>
-            <p className="text-base font-normal">5 Items</p>
-          </div>
-        </div>
-        <div className="flex relative hover:scale-105 justify-center">
-          <img
-            src={img4}
-            alt="img4"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
-          />
-          <img
-            src={img9}
-            alt="img9"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-            <p className="text-base font-bold">CLOTHS</p>
-            <p className="text-base font-normal">5 Items</p>
-          </div>
-        </div>
-        <div className="flex relative hover:scale-105 justify-center">
-          <img
-            src={img5}
-            alt="img5"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 hidden xl:block"
-          />
-          <img
-            src={img10}
-            alt="img10"
-            className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 block xl:hidden"
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-            <p className="text-base font-bold">CLOTHS</p>
-            <p className="text-base font-normal">5 Items</p>
-          </div>
-        </div>
+        {topCategories.map((category) => (
+          <Link
+            to={`/shopping/${
+              category.gender === "k" ? "kadin" : "erkek"
+            }/${category.title.toLowerCase()}`}
+            key={category.id}
+            className="flex relative hover:scale-105 justify-center"
+          >
+            <img
+              src={category.img}
+              alt={category.title}
+              className="cursor-pointer duration-200 transition opacity-100 hover:opacity-60 w-[205px]"
+            />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+              <p className="text-base font-bold">{category.title}</p>
+            </div>
+          </Link>
+        ))}
       </div>
       <div className="flex px-[10%] py-6 items-center justify-between flex-col xl:flex-row gap-4 xl:gap-0">
         <h2 className="text-[#737373] text-sm font-bold">
