@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const instanceAxios = axios.create({
-  baseURL: "https://workinteck-fe-final.onrender.com",
+  baseURL: "https://workintech-fe-ecommerce.onrender.com",
 });
