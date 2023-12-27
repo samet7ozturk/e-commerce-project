@@ -7,3 +7,7 @@ export const loginUserFailure = (data) => ({
   type: "LOGIN_USER_FAILURE",
   payload: data,
 });
+
+export const loginExit = () => ({
+  type: "USER_EXIT",
+});
