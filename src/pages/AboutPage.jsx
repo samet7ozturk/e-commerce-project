@@ -106,7 +106,7 @@ const AboutPage = () => {
           </p>
         </div>
         <div className="relative flex overflow-x-hidden px-[10%]">
-          <div className="flex py-12 animate-marquee whitespace-nowrap">
+          <div className="flex py-12 animate-marquee whitespace-nowrap items-center">
             <div>
               <img
                 src={svg3}
@@ -150,7 +150,7 @@ const AboutPage = () => {
               />
             </div>
           </div>
-          <div className="flex absolute top-0 py-12 animate-marquee2 whitespace-nowrap">
+          <div className="flex absolute top-0 py-12 animate-marquee2 whitespace-nowrap items-center">
             <div>
               <img
                 src={svg3}
