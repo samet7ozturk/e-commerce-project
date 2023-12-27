@@ -10,12 +10,14 @@ export const login = (credentials) => {
       );
 
       const user = {
-        id: response.data.id,
+        id: response.data.role_id,
         name: response.data.name,
-        email: credentials.email,
+        email: response.data.email,
       };
+      console.log("user :", user);
+      console.log("response :", response.data);
 
-      dispatch(loginUserSuccess(user));
+      dispatch(loginUserSuccess(response.data));
 
       localStorage.setItem("token", response.data.token);
       axios.defaults.headers.common["Authorization"] = response.data.token;
