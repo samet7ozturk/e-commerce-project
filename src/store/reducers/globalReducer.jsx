@@ -8,7 +8,7 @@ const initialState = {
 const globalReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_GLOBAL_DATA":
-      return action.payload;
+      return { ...state, categories: [...action.payload] };
     default:
       return state;
   }
