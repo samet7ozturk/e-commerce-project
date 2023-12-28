@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router";
+
 import Header from "../components/Header";
 import BestSellerProduct from "../layout/BestSellerProducts";
+import ProductDescription from "../layout/ProductDescription";
 import Footer from "../components/Footer";
 
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import svg1 from "../assets/right-arrow.svg";
 import svg2 from "../assets/product-page-stars.svg";
 import svg3 from "../assets/product-colors-2.svg";
@@ -16,13 +20,21 @@ import svg11 from "../assets/stripe.svg";
 import svg12 from "../assets/aws.svg";
 import svg13 from "../assets/reddit.svg";
 import img1 from "../assets/product-page-1.png";
-import ProductDescription from "../layout/ProductDescription";
 
 const ProductPage = () => {
+  const history = useNavigate();
+
+  const handleGoBack = () => {
+    history(-1);
+  };
+
   return (
     <main className=" font-montserrat">
       <Header />
       <div className="bg-[#FAFAFA] pb-10">
+        <button className="px-[10%] pt-8" onClick={handleGoBack}>
+          <ArrowLeftCircleIcon className="h-8 w-8 text-blue-500" />
+        </button>
         <div className="flex gap-4 px-[10%] h-[92px] items-center justify-center xl:justify-start">
           <p className="text-[#252B42] text-sm font-bold">Home</p>
           <img src={svg1} alt="svg1" />
