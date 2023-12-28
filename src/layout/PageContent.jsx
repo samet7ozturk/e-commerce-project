@@ -28,6 +28,11 @@ const PageContent = () => {
 
         <Route path="/product-list-page" element={<ProductListPage />} />
 
+        <Route
+          path="/product-page/:category/:productId/:productNameSlug"
+          element={<ProductPage />}
+        />
+
         <Route path="/product-page" element={<ProductPage />} />
 
         <Route path="/about-page" element={<AboutPage />} />
