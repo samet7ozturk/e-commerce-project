@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { instanceAxios } from "../api/api";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -16,10 +16,7 @@ const SignUpPage = () => {
   const history = useNavigate();
   const [roleOptions, setRoleOptions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [defaultRole, setDefaultRole] = useState("");
-
-  console.log(errors);
-  console.log(loading);
+  const [defaultRole, setDefaultRole] = useState(3);
 
   const watchPassword = watch("password", "");
 
@@ -34,7 +31,6 @@ const SignUpPage = () => {
     if (!hasNumber || !hasLowerCase || !hasUpperCase) {
       return "Şifre en az 1 sayı, 1 küçük harf ve 1 büyük harf içermelidir!";
     }
-
     return true;
   };
 
@@ -47,11 +43,10 @@ const SignUpPage = () => {
     const { confirmPassword, ...postData } = data;
     console.log("data", postData);
     setLoading(true);
-    axios
-      .post("https://workintech-fe-ecommerce.onrender.com/signup", postData)
+    instanceAxios
+      .post("/signup", postData)
       .then((res) => {
         console.log("post", res.data);
-        localStorage.setItem("token", res.data.token);
         history("/");
       })
       .catch((error) => {
@@ -64,16 +59,14 @@ const SignUpPage = () => {
 
   const handleRoleChange = (e) => {
     setValue("role_id", e.target.value);
+    setDefaultRole(e.target.value);
   };
 
   useEffect(() => {
-    axios
-      .get("https://workintech-fe-ecommerce.onrender.com/roles")
+    instanceAxios
+      .get("/roles")
       .then((response) => {
         setRoleOptions(response.data);
-        if (response.data.length > 0) {
-          setDefaultRole(response.data[2].id);
-        }
       })
       .catch((error) => {
         console.error("Role options request failed:", error);
@@ -250,8 +243,8 @@ const SignUpPage = () => {
             <button
               className={`bg-blue-100 font-semibold w-36 h-12 rounded-lg my-6 ${
                 loading
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:animate-wiggle-more hover:animate-twice"
+                  ? "opacity-50 cursor-not-allowed hover:animate-wiggle-more hover:animate-twice"
+                  : ""
               }`}
               type="submit"
               disabled={loading}
