@@ -1,9 +1,12 @@
-import { useEffect } from "react";
-import { instanceAxios } from "../api/api";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { fetchProducts } from "../store/thunks/productsThunk";
+import { categories } from "../store/thunks/categoryThunk";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import BestSellerProduct from "../layout/BestSellerProducts";
 
 import svg1 from "../assets/right-arrow.svg";
 import svg2 from "../assets/product-page-1.svg";
@@ -15,17 +18,30 @@ import svg7 from "../assets/vector.svg";
 import svg8 from "../assets/stripe.svg";
 import svg9 from "../assets/aws.svg";
 import svg10 from "../assets/reddit.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { categories } from "../store/thunks/categoryThunk";
-import { Link } from "react-router-dom";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.global.categories);
+  const data = useSelector((state) => state.global.categories);
+  const { productList, totalProductCount } = useSelector(
+    (state) => state.products
+  );
+
+  const [selectedCategory, setSelectedCategory] = useState("1");
+  const [customFilter, setCustomFilter] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(categories());
-  }, []);
+    setIsLoading(true);
+    dispatch(
+      fetchProducts({
+        category: selectedCategory,
+        filter: customFilter,
+        sort: selectedSort,
+      })
+    ).finally(() => setIsLoading(false));
+  }, [selectedCategory, customFilter, selectedSort]);
 
   const sortedData = [...data].sort((a, b) => b.rating - a.rating);
   const topCategories = sortedData.slice(0, 5);
@@ -61,9 +77,14 @@ const ProductListPage = () => {
           </Link>
         ))}
       </div>
+      {isLoading && (
+        <div className="flex justify-center items-center fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-blue-500"></div>
+        </div>
+      )}
       <div className="flex px-[10%] py-6 items-center justify-between flex-col xl:flex-row gap-4 xl:gap-0">
         <h2 className="text-[#737373] text-sm font-bold">
-          Showing all 12 results
+          Showing all {totalProductCount} results
         </h2>
         <div className="flex gap-4 justify-center xl:justify-start items-center">
           <p className="text-[#737373] text-sm font-bold">Views:</p>
@@ -73,7 +94,52 @@ const ProductListPage = () => {
           <img src={svg3} alt="svg3" />
         </div>
       </div>
-      <BestSellerProduct />
+      <form>
+        <label>
+          Category:
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </label>
+        <label>
+          Filter:
+          <input
+            type="text"
+            value={customFilter}
+            onChange={(e) => setCustomFilter(e.target.value)}
+          />
+        </label>
+        <label>
+          Sort:
+          <select
+            value={selectedSort}
+            onChange={(e) => setSelectedSort(e.target.value)}
+          >
+            <option value="default">Default</option>
+            <option value="price:asc">PRICE: Low to High</option>
+            <option value="price:desc">PROCE: High to Low</option>
+            <option value="rating:asc">RATING: Low to High</option>
+            <option value="rating:desc">RATING: Low To High</option>
+          </select>
+        </label>
+      </form>
+      <div className="flex">
+        {productList?.map((product) => (
+          <div key={product.id}>
+            <img src={product.images[0].url} />
+            <h3>{product.name}</h3>
+            <p>{product.price}</p>
+            <p>{product.rating}</p>
+          </div>
+        ))}
+      </div>
+
       <div className="flex justify-center pb-8">
         <img src={svg4} alt="svg4" />
       </div>
