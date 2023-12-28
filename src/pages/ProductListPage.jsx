@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { fetchProducts } from "../store/thunks/productsThunk";
+import { fetchNextPage, fetchProducts } from "../store/thunks/productsThunk";
 import { categories } from "../store/thunks/categoryThunk";
 
 import Header from "../components/Header";
@@ -18,6 +18,8 @@ import svg7 from "../assets/vector.svg";
 import svg8 from "../assets/stripe.svg";
 import svg9 from "../assets/aws.svg";
 import svg10 from "../assets/reddit.svg";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ProductCard from "../components/ProductCard";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
@@ -25,11 +27,31 @@ const ProductListPage = () => {
   const { productList, totalProductCount } = useSelector(
     (state) => state.products
   );
+  const categoriesData = [
+    { id: "1", text: "Tişört" },
+    { id: "2", text: "Ayakkabı" },
+    { id: "3", text: "Ceket" },
+    { id: "4", text: "Elbise" },
+  ];
 
   const [selectedCategory, setSelectedCategory] = useState("1");
   const [customFilter, setCustomFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchData = (data) => {
+    setIsLoading(true);
+    dispatch(fetchNextPage(data))
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching next page:", error);
+        setIsLoading(false);
+        setHasMore(false);
+      });
+  };
 
   useEffect(() => {
     dispatch(categories());
@@ -40,7 +62,12 @@ const ProductListPage = () => {
         filter: customFilter,
         sort: selectedSort,
       })
-    ).finally(() => setIsLoading(false));
+    )
+      .finally(() => setIsLoading(false))
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        setHasMore(false); // Hata durumunda hasMore'u false yapın
+      });
   }, [selectedCategory, customFilter, selectedSort]);
 
   const sortedData = [...data].sort((a, b) => b.rating - a.rating);
@@ -91,54 +118,95 @@ const ProductListPage = () => {
           <img src={svg2} alt="svg2" />
         </div>
         <div>
-          <img src={svg3} alt="svg3" />
+          <form className="flex">
+            <label className="flex border-2 items-center p-2">
+              <p className="text-[#737373] text-sm font-bold">Category:</p>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                {categoriesData.map((category) => (
+                  <option
+                    key={category.id}
+                    value={category.id}
+                    className="text-[#737373] text-sm font-bold"
+                  >
+                    {category.text}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex border-2 items-center p-2">
+              <p className="text-[#737373] text-sm font-bold">Sort:</p>
+              <select
+                value={selectedSort}
+                onChange={(e) => setSelectedSort(e.target.value)}
+              >
+                <option
+                  value="default"
+                  className="text-[#737373] text-sm font-bold"
+                >
+                  Default
+                </option>
+                <option
+                  value="price:asc"
+                  className="text-[#737373] text-sm font-bold"
+                >
+                  PRICE: Low to High
+                </option>
+                <option
+                  value="price:desc"
+                  className="text-[#737373] text-sm font-bold"
+                >
+                  PROCE: High to Low
+                </option>
+                <option
+                  value="rating:asc"
+                  className="text-[#737373] text-sm font-bold"
+                >
+                  RATING: Low to High
+                </option>
+                <option
+                  value="rating:desc"
+                  className="text-[#737373] text-sm font-bold"
+                >
+                  RATING: Low To High
+                </option>
+              </select>
+            </label>
+            <label className="flex border-2 items-center p-2">
+              Filter:
+              <input
+                type="text"
+                value={customFilter}
+                onChange={(e) => setCustomFilter(e.target.value)}
+                className="w-20"
+              />
+            </label>
+          </form>
         </div>
       </div>
-      <form>
-        <label>
-          Category:
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-        </label>
-        <label>
-          Filter:
-          <input
-            type="text"
-            value={customFilter}
-            onChange={(e) => setCustomFilter(e.target.value)}
-          />
-        </label>
-        <label>
-          Sort:
-          <select
-            value={selectedSort}
-            onChange={(e) => setSelectedSort(e.target.value)}
-          >
-            <option value="default">Default</option>
-            <option value="price:asc">PRICE: Low to High</option>
-            <option value="price:desc">PROCE: High to Low</option>
-            <option value="rating:asc">RATING: Low to High</option>
-            <option value="rating:desc">RATING: Low To High</option>
-          </select>
-        </label>
-      </form>
-      <div className="flex">
-        {productList?.map((product) => (
-          <div key={product.id}>
-            <img src={product.images[0].url} />
-            <h3>{product.name}</h3>
-            <p>{product.price}</p>
-            <p>{product.rating}</p>
-          </div>
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={productList.length} // Ürün listesinin uzunluğu
+        next={() =>
+          fetchData({
+            selectedCategory,
+            customFilter,
+            selectedSort,
+            offset: 25,
+          })
+        } // Yeni veri getirme fonksiyonu
+        hasMore={hasMore} // Daha fazla veri olup olmadığını kontrol eden boolean
+        loader={<h4>Loading...</h4>} // Yükleme animasyonu
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+        className="flex flex-col"
+      >
+        <ProductCard />
+      </InfiniteScroll>
 
       <div className="flex justify-center pb-8">
         <img src={svg4} alt="svg4" />
