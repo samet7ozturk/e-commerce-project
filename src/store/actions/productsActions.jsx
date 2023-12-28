@@ -12,3 +12,8 @@ export const setFailed = (data) => ({
   type: "FAILED",
   payload: data,
 });
+
+export const fetchMore = (data) => ({
+  type: "FETCH_MORE",
+  payload: data,
+});
