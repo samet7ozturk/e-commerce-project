@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginExit } from "../store/actions/userActions";
 
+import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhone,
@@ -138,7 +139,7 @@ const Header = () => {
                         <p className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat">
                           Kadın
                         </p>
-                        <faPhone
+                        <ChevronUpIcon
                           strokeWidth={2.5}
                           className={`h-3.5 w-3.5 transition-transform ${
                             openMenu1 ? "rotate-90" : ""
@@ -169,7 +170,7 @@ const Header = () => {
                         <p className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat">
                           Erkek
                         </p>
-                        <faPhone
+                        <ChevronUpIcon
                           strokeWidth={2.5}
                           className={`h-3.5 w-3.5 transition-transform ${
                             openMenu2 ? "rotate-90" : ""
