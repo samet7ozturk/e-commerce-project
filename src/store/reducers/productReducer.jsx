@@ -8,6 +8,19 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCHING":
+      return { ...state, loading: true };
+
+    case "FETCHED":
+      return {
+        ...state,
+        totalProductCount: action.payload.total,
+        productList: action.payload.products,
+        fetchState: "FETCHED",
+      };
+
+    case "FAILED":
+      return { ...state, loading: false, products: [], error: action.payload };
     default:
       return state;
   }
