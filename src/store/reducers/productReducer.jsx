@@ -21,6 +21,15 @@ const productReducer = (state = initialState, action) => {
 
     case "FAILED":
       return { ...state, loading: false, products: [], error: action.payload };
+
+    case "FETCH_MORE":
+      return {
+        ...state,
+        totalProductCount: action.payload.total,
+        productList: [...state.productList, ...action.payload.products],
+        fetchState: "sadas",
+      };
+
     default:
       return state;
   }
