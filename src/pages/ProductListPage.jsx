@@ -66,7 +66,7 @@ const ProductListPage = () => {
       .finally(() => setIsLoading(false))
       .catch((error) => {
         console.error("Error fetching products:", error);
-        setHasMore(false); // Hata durumunda hasMore'u false yapın
+        setHasMore(false);
       });
   }, [selectedCategory, customFilter, selectedSort]);
 
@@ -158,7 +158,7 @@ const ProductListPage = () => {
                   value="price:desc"
                   className="text-[#737373] text-sm font-bold"
                 >
-                  PROCE: High to Low
+                  PRICE: High to Low
                 </option>
                 <option
                   value="rating:asc"
