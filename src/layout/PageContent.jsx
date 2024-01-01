@@ -26,7 +26,7 @@ const PageContent = () => {
           element={<ProductListPage />}
         />
 
-        <Route path="/product-list-page" element={<ProductListPage />} />
+        <Route path="/shopping" element={<ProductListPage />} />
 
         <Route
           path="/product-page/:category/:productId/:productNameSlug"
