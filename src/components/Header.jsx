@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginExit } from "../store/actions/userActions";
+import { loginExit, loginUserVerify } from "../store/actions/userActions";
 
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,6 +26,7 @@ import {
   MenuList,
   Typography,
 } from "@material-tailwind/react";
+import { instanceAxios } from "../api/api";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,20 @@ const Header = () => {
     localStorage.removeItem("token");
     dispatch(loginExit());
   };
+
+  useEffect(() => {
+    if (token) {
+      instanceAxios.defaults.headers.common["Authorization"] = token;
+      instanceAxios
+        .get("/verify")
+        .then((response) => {
+          dispatch(loginUserVerify(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
 
   return (
     <main className="font-bold">
@@ -115,7 +130,7 @@ const Header = () => {
               <Link to="/">Home</Link>
             </div>
             <div className="flex items-center ">
-              <Link to="/product-list-page">Shop</Link>
+              <Link to="/shopping">Shop</Link>
             </div>
             <div className="flex items-center">
               <Link to="/about-page">About</Link>

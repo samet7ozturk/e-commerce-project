@@ -5,6 +5,13 @@ const userReducer = (state = initialState, action) => {
     case "LOGIN_USER_SUCCESS":
       return {
         ...state,
+        id: action.payload.id,
+        name: action.payload.name,
+        email: action.payload.email,
+      };
+    case "LOGIN_USER_VERIFY":
+      return {
+        ...state,
         id: action.payload.role_id,
         name: action.payload.name,
         email: action.payload.email,
@@ -12,6 +19,7 @@ const userReducer = (state = initialState, action) => {
     case "LOGIN_USER_FAILURE":
       return action.payload;
     case "USER_EXIT":
+      localStorage.removeItem("shoppingCart");
       return initialState;
     default:
       return state;
