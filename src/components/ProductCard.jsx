@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import svg from "../assets/product-colors.svg";
 import { addToCart } from "../store/actions/shoppingCartActions";
 
 const ProductCard = () => {
   const dispatch = useDispatch();
+  const link = useNavigate();
+  const location = useLocation();
   const { productList } = useSelector((state) => state.products);
+  const token = localStorage.getItem("token");
 
   const turkishSlugify = (str) => {
     const turkishMap = {
@@ -33,7 +36,12 @@ const ProductCard = () => {
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+    if (token) {
+      dispatch(addToCart(product));
+    } else {
+      localStorage.setItem("returnTo", location.pathname);
+      link("/login");
+    }
   };
 
   return (

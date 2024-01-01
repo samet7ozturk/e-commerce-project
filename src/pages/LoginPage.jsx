@@ -11,12 +11,18 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const link = useNavigate();
+  const returnToPath = localStorage.getItem("returnTo");
 
   const onSubmit = async (data) => {
     try {
       await dispatch(login(data));
-      history("/");
+      console.log("returnnnnnnnnnnn", returnToPath);
+      if (returnToPath === "/shopping") {
+        link(returnToPath);
+      } else {
+        link("/");
+      }
     } catch (error) {
       console.error("Login failed:", error.message);
     }
