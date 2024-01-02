@@ -10,40 +10,45 @@ const initialCartState = storedCart ? JSON.parse(storedCart) : initialState;
 const shoppingCartReducer = (state = initialCartState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const existingProductIndex = state.cart.findIndex(
+      const existingProduct = state.cart.find(
         (item) => item.product.id === action.payload.id
       );
-
-      if (existingProductIndex !== -1) {
-        const updatedCart = [...state.cart];
-        updatedCart[existingProductIndex].count += 1;
-
-        const newState = {
+      localStorage.setItem("shoppingCart", JSON.stringify(state));
+      if (existingProduct) {
+        return {
           ...state,
-          cart: updatedCart,
+          cart: state.cart.map((item) =>
+            item.product.id === action.payload.id
+              ? { ...item, count: item.count + 1 }
+              : item
+          ),
         };
-
-        localStorage.setItem("shoppingCart", JSON.stringify(newState));
-
-        return newState;
       } else {
-        const newState = {
+        return {
           ...state,
           cart: [
             ...state.cart,
-            {
-              count: 1,
-              checked: true,
-              product: {
-                ...action.payload,
-              },
-            },
+            { product: action.payload, count: 1, checked: false },
           ],
         };
+      }
 
-        localStorage.setItem("shoppingCart", JSON.stringify(newState));
-
-        return newState;
+    case "DECREASE_COUNT":
+      const decreasedItem = state.cart.find(
+        (item) => item.product.id === action.payload.id
+      );
+      if (decreasedItem.count > 1) {
+        localStorage.setItem("shoppingCart", JSON.stringify(state));
+        return {
+          ...state,
+          cart: state.cart.map((item) =>
+            item.product.id === action.payload.id
+              ? { ...item, count: item.count - 1 }
+              : item
+          ),
+        };
+      } else {
+        return state;
       }
 
     default:
