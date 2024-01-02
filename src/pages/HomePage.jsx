@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import { Carousel1 } from "../layout/Carousel-1";
 import EditorsPick from "../layout/EditorsPick";
-import BestSellerProduct from "../layout/BestSellerProducts";
+import BestSellerProduct1 from "../layout/BestSellerProducts1";
 import { Carousel2 } from "../layout/Carousel-2";
 import ProductIntroduction from "../layout/ProductIntroduction";
 import FeaturedPost from "../layout/FeaturedPost";
@@ -22,7 +22,7 @@ const HomePage = () => {
           Problems trying to resolve the conflict between
         </p>
       </div>
-      <BestSellerProduct />
+      <BestSellerProduct1 />
       <Carousel2 />
       <ProductIntroduction />
       <FeaturedPost />
