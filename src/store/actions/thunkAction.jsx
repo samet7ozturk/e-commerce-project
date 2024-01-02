@@ -11,10 +11,8 @@ export const login = (credentials) => {
         name: response.data.name,
         email: response.data.email,
       };
-      console.log("user :", user);
-      console.log("response :", response.data);
 
-      dispatch(loginUserSuccess(response.data));
+      dispatch(loginUserSuccess(user));
 
       localStorage.setItem("token", response.data.token);
     } catch (error) {
