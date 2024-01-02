@@ -18,8 +18,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import {
-  Avatar,
-  IconButton,
   Menu,
   MenuHandler,
   MenuItem,
@@ -27,17 +25,19 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { instanceAxios } from "../api/api";
+import {
+  addToCart,
+  decrease,
+  deleteProduct,
+} from "../store/actions/shoppingCartActions";
 
 const Header = () => {
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
-  console.log(
-    "*******************",
-    shoppingCart.cart[0]?.product.images[0].url
-  );
 
   const [openMenu1, setOpenMenu1] = useState(false);
   const [openMenu2, setOpenMenu2] = useState(false);
+  const [openMenu3, setOpenMenu3] = useState(false);
   const categories = useSelector((store) => store.global.categories);
   const femaleCategories = categories.filter(
     (category) => category.gender === "k"
@@ -54,6 +54,32 @@ const Header = () => {
     localStorage.removeItem("token");
     dispatch(loginExit());
   };
+
+  const toggleBasket = () => {
+    setOpenMenu3((basketOpen) => !basketOpen);
+  };
+
+  const increaseCount = (cartItem) => {
+    dispatch(addToCart(cartItem));
+  };
+
+  const decreaseCount = (cartItem) => {
+    dispatch(decrease(cartItem));
+  };
+
+  const deleteItem = (cartItem) => {
+    dispatch(deleteProduct(cartItem));
+  };
+
+  const calculateTotalPrice = (cart) => {
+    let totalPrice = 0;
+    for (const cartItem of cart) {
+      totalPrice += cartItem.product.price * cartItem.count;
+    }
+    return totalPrice;
+  };
+
+  const totalCartPrice = calculateTotalPrice(shoppingCart.cart).toFixed(2);
 
   useEffect(() => {
     if (token) {
@@ -242,9 +268,9 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-2">
-            <Menu>
-              <MenuHandler>
-                <IconButton variant="text">
+            {openMenu3 ? (
+              <div className="flex flex-col z-10 bg-white absolute right-20 top-20 justify-between">
+                <button onClick={() => toggleBasket()}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="16"
@@ -253,37 +279,75 @@ const Header = () => {
                   >
                     <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                   </svg>
-                </IconButton>
-              </MenuHandler>
-              <MenuList className="flex flex-col gap-2">
-                {shoppingCart.cart.map((cartItem) => (
-                  <MenuItem
-                    key={cartItem.product.id}
-                    className="flex items-center gap-4 py-2 pl-2 pr-8"
-                  >
-                    <div className="flex gap-1">
-                      <img
-                        src={cartItem.product.images[0].url}
-                        alt="Ürün Resmi"
-                        className="w-10 h-10"
-                      />
-                      <Typography
-                        variant="small"
-                        color="gray"
-                        className="font-semibold"
-                      >
-                        {cartItem.product.name}
-                      </Typography>
+                </button>
+                <div className="flex flex-col gap-2">
+                  {shoppingCart?.cart.map((cartItem) => (
+                    <div
+                      key={cartItem.product.id}
+                      className="flex items-center gap-4 py-2 pl-2  border"
+                    >
+                      <div className="flex gap-1">
+                        <img
+                          src={cartItem.product.images[0].url}
+                          alt="Ürün Resmi"
+                          className="w-10 h-14"
+                        />
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="font-semibold flex items-center text-[#737373] text-center"
+                        >
+                          {cartItem.product.name}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="flex gap-2"
+                        >
+                          <p className="text-[#23A6F0] font-bold">Piece:</p>
+                          <button
+                            onClick={() => decreaseCount(cartItem.product)}
+                            className="border bg-[#23A6F0] w-4"
+                          >
+                            -
+                          </button>
+                          {cartItem.count}
+                          <button
+                            onClick={() => increaseCount(cartItem.product)}
+                            className="border w-4"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div variant="small" color="gray" className="">
+                          <p className="text-[#23A6F0] font-bold">Price</p>
+                          {(cartItem.product.price * cartItem.count).toFixed(2)}
+                        </div>
+                      </div>
+                      <button onClick={() => deleteItem(cartItem.product)}>
+                        Delete
+                      </button>
                     </div>
-                    <div>
-                      <Typography variant="small" color="gray">
-                        Adet: {cartItem.count}
-                      </Typography>
-                    </div>
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
+                  ))}
+                  {<p>Total Price: {totalCartPrice}</p>}
+                </div>
+              </div>
+            ) : (
+              <button onClick={() => toggleBasket()}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="18"
+                  viewBox="0 0 576 512"
+                >
+                  <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                </svg>
+              </button>
+            )}
             <p>{shoppingCart.cart.length}</p>
           </div>
           <div className="flex items-center gap-2">
