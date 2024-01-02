@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 
 import Header from "../components/Header";
-import BestSellerProduct from "../layout/BestSellerProducts";
+import BestSellerProduct1 from "../layout/BestSellerProducts1";
 import ProductDescription from "../layout/ProductDescription";
 import Footer from "../components/Footer";
 
@@ -74,7 +74,7 @@ const ProductPage = () => {
         </div>
       </div>
       <ProductDescription />
-      <BestSellerProduct />
+      <BestSellerProduct1 />
       <div className="flex pt-[72px] pb-32 items-center justify-evenly flex-col xl:flex-row gap-[43px] xl:gap-0">
         <div>
           <img
