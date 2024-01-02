@@ -50,7 +50,18 @@ const shoppingCartReducer = (state = initialCartState, action) => {
       } else {
         return state;
       }
-
+    case "DELETE_PRODUCT":
+      const updatedCart = state.cart.filter(
+        (item) => item.product.id !== action.payload.id
+      );
+      localStorage.setItem(
+        "shoppingCart",
+        JSON.stringify({ ...state, cart: updatedCart })
+      );
+      return {
+        ...state,
+        cart: updatedCart,
+      };
     default:
       return state;
   }

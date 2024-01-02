@@ -7,3 +7,8 @@ export const decrease = (data) => ({
   type: "DECREASE_COUNT",
   payload: data,
 });
+
+export const deleteProduct = (data) => ({
+  type: "DELETE_PRODUCT",
+  payload: data,
+});
