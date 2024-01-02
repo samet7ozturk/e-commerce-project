@@ -9,6 +9,7 @@ import ContactPage from "../pages/ContactPage";
 import SignUpPage from "../pages/SignUpPage";
 import ProductListPage from "../pages/ProductListPage";
 import LoginPage from "../pages/LoginPage";
+import ShoppingCartPage from "../pages/ShoppingCartPage";
 
 const PageContent = () => {
   return (
@@ -32,6 +33,8 @@ const PageContent = () => {
           path="/product-page/:category/:productId/:productNameSlug"
           element={<ProductPage />}
         />
+
+        <Route path="/shopping-cart-page" element={<ShoppingCartPage />} />
 
         <Route path="/product-page" element={<ProductPage />} />
 
