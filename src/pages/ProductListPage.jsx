@@ -205,7 +205,11 @@ const ProductListPage = () => {
         }
         className="flex flex-col"
       >
-        <ProductCard />
+        <div className="flex flex-wrap flex-row justify-center py-12 px-[10%] gap-8">
+          {productList.map((item) => (
+            <ProductCard product={item} />
+          ))}
+        </div>
       </InfiniteScroll>
 
       <div className="flex justify-center pb-8">
