@@ -13,8 +13,19 @@ const shoppingCartReducer = (state = initialCartState, action) => {
       const existingProduct = state.cart.find(
         (item) => item.product.id === action.payload.id
       );
-      localStorage.setItem("shoppingCart", JSON.stringify(state));
+
       if (existingProduct) {
+        localStorage.setItem(
+          "shoppingCart",
+          JSON.stringify({
+            ...state,
+            cart: state.cart.map((item) =>
+              item.product.id === action.payload.id
+                ? { ...item, count: item.count + 1 }
+                : item
+            ),
+          })
+        );
         return {
           ...state,
           cart: state.cart.map((item) =>
@@ -24,6 +35,16 @@ const shoppingCartReducer = (state = initialCartState, action) => {
           ),
         };
       } else {
+        localStorage.setItem(
+          "shoppingCart",
+          JSON.stringify({
+            ...state,
+            cart: [
+              ...state.cart,
+              { product: action.payload, count: 1, checked: false },
+            ],
+          })
+        );
         return {
           ...state,
           cart: [
@@ -38,7 +59,17 @@ const shoppingCartReducer = (state = initialCartState, action) => {
         (item) => item.product.id === action.payload.id
       );
       if (decreasedItem.count > 1) {
-        localStorage.setItem("shoppingCart", JSON.stringify(state));
+        localStorage.setItem(
+          "shoppingCart",
+          JSON.stringify({
+            ...state,
+            cart: state.cart.map((item) =>
+              item.product.id === action.payload.id
+                ? { ...item, count: item.count - 1 }
+                : item
+            ),
+          })
+        );
         return {
           ...state,
           cart: state.cart.map((item) =>
@@ -50,6 +81,7 @@ const shoppingCartReducer = (state = initialCartState, action) => {
       } else {
         return state;
       }
+
     case "DELETE_PRODUCT":
       const updatedCart = state.cart.filter(
         (item) => item.product.id !== action.payload.id
@@ -62,6 +94,7 @@ const shoppingCartReducer = (state = initialCartState, action) => {
         ...state,
         cart: updatedCart,
       };
+
     default:
       return state;
   }
