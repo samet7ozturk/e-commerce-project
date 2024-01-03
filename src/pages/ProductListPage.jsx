@@ -187,7 +187,7 @@ const ProductListPage = () => {
         </div>
       </div>
       <InfiniteScroll
-        dataLength={productList.length} // Ürün listesinin uzunluğu
+        dataLength={productList.length}
         next={() =>
           fetchData({
             selectedCategory,
@@ -195,9 +195,9 @@ const ProductListPage = () => {
             selectedSort,
             offset: 25,
           })
-        } // Yeni veri getirme fonksiyonu
-        hasMore={hasMore} // Daha fazla veri olup olmadığını kontrol eden boolean
-        loader={<h4>Loading...</h4>} // Yükleme animasyonu
+        }
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
@@ -207,7 +207,7 @@ const ProductListPage = () => {
       >
         <div className="flex flex-wrap flex-row justify-center py-12 px-[10%] gap-8">
           {productList.map((item) => (
-            <ProductCard product={item} />
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       </InfiniteScroll>
