@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import { fetchNextPage, fetchProducts } from "../store/thunks/productsThunk";
 import { categories } from "../store/thunks/categoryThunk";
@@ -23,18 +24,23 @@ import ProductCard from "../components/ProductCard";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
+  let [searchParams, setSearchParams] = useSearchParams();
   const data = useSelector((state) => state.global.categories);
   const { productList, totalProductCount } = useSelector(
     (state) => state.products
   );
+
   const categoriesData = [
+    { id: "", text: "Default" },
     { id: "1", text: "Tişört" },
     { id: "2", text: "Ayakkabı" },
     { id: "3", text: "Ceket" },
     { id: "4", text: "Elbise" },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState("1");
+  const { register, handleSubmit } = useForm();
+
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [customFilter, setCustomFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,22 +59,33 @@ const ProductListPage = () => {
       });
   };
 
+  const onSubmit = (data) => {
+    console.log("formmmm", data);
+    setIsLoading(true);
+    setSearchParams({
+      category: data.category,
+      filter: data.filter,
+      sort: data.sort,
+    });
+    dispatch(
+      fetchProducts({
+        category: data.category,
+        filter: data.filter,
+        sort: data.sort,
+      })
+    ).finally(() => setIsLoading(false));
+  };
+
   useEffect(() => {
     dispatch(categories());
     setIsLoading(true);
-    dispatch(
-      fetchProducts({
-        category: selectedCategory,
-        filter: customFilter,
-        sort: selectedSort,
-      })
-    )
+    dispatch(fetchProducts({}))
       .finally(() => setIsLoading(false))
       .catch((error) => {
         console.error("Error fetching products:", error);
         setHasMore(false);
       });
-  }, [selectedCategory, customFilter, selectedSort]);
+  }, []);
 
   const sortedData = [...data].sort((a, b) => b.rating - a.rating);
   const topCategories = sortedData.slice(0, 5);
@@ -118,13 +135,10 @@ const ProductListPage = () => {
           <img src={svg2} alt="svg2" />
         </div>
         <div>
-          <form className="flex">
+          <form className="flex" onSubmit={handleSubmit(onSubmit)}>
             <label className="flex border-2 items-center p-2">
               <p className="text-[#737373] text-sm font-bold">Category:</p>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
+              <select {...register("category")}>
                 {categoriesData.map((category) => (
                   <option
                     key={category.id}
@@ -138,10 +152,7 @@ const ProductListPage = () => {
             </label>
             <label className="flex border-2 items-center p-2">
               <p className="text-[#737373] text-sm font-bold">Sort:</p>
-              <select
-                value={selectedSort}
-                onChange={(e) => setSelectedSort(e.target.value)}
-              >
+              <select {...register("sort")}>
                 <option
                   value="default"
                   className="text-[#737373] text-sm font-bold"
@@ -176,13 +187,9 @@ const ProductListPage = () => {
             </label>
             <label className="flex border-2 items-center p-2">
               Filter:
-              <input
-                type="text"
-                value={customFilter}
-                onChange={(e) => setCustomFilter(e.target.value)}
-                className="w-20"
-              />
+              <input type="text" {...register("filter")} className="w-20" />
             </label>
+            <button type="submit">Filter</button>
           </form>
         </div>
       </div>
