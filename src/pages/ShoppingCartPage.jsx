@@ -103,7 +103,7 @@ const ShoppingCartPage = () => {
                 </div>
                 <button
                   onClick={() => deleteItem(cartItem)}
-                  className="pr-4 text-[#23A6F0]"
+                  className="pr-4 text-[#23A6F0] hover:scale-125 transition duration-300"
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -111,15 +111,54 @@ const ShoppingCartPage = () => {
             </div>
           ))}
         </div>
-        <div className="border-2 w-[350px] text-center bg-white shadow-sm">
-          <div className="text-[#737373] font-bold">Order Summary</div>
-          <div className="font-bold">Shipping: $10</div>
-          {<p className="font-bold">Total Price: ${totalPrice}</p>}
+        <div className="flex flex-col justify-center gap-6 border-2 w-[350px] text-center bg-white shadow-sm px-[5%]">
+          <div className="text-[#23A6F0] font-bold">Order Summary</div>
+          <div className="flex font-bold justify-between">
+            <p className="text-[#737373]">Shipping:</p>
+            {totalPrice > "200" ? (
+              <p className="line-through decoration-blue-500 decoration-4">
+                $15
+              </p>
+            ) : (
+              <p>$15</p>
+            )}
+          </div>
+
+          {totalPrice > "200" ? (
+            <div className="flex flex-col font-bold justify-between">
+              <p>Free shipping on orders over 200 dollars.</p>
+            </div>
+          ) : (
+            ""
+          )}
+          {
+            <div className="flex justify-between">
+              <p className="font-bold text-[#737373]">Items Price:</p>
+              <p className="font-bold">${totalPrice}</p>
+            </div>
+          }
+
+          <hr />
+          {
+            <div className="flex justify-between">
+              <p className="font-bold text-[#737373]">Total Price:</p>
+              <p className="font-bold">
+                $
+                {parseFloat(totalPrice) > 200
+                  ? totalPrice
+                  : parseFloat(totalPrice) + 15}
+              </p>
+            </div>
+          }
           <Link to="/order-page">
-            <button className="border-2 w-[150px]">PROCEED TO CHECKOUT</button>
+            <button className="bg-blue-300 w-[150px] hover:scale-105 transition duration-300">
+              PROCEED TO CHECKOUT
+            </button>
           </Link>
           <Link to="/shopping">
-            <button className="border-2 w-[150px]">CONTINUE SHOPPING</button>
+            <button className="bg-blue-300 w-[150px] hover:scale-105 transition duration-300">
+              CONTINUE SHOPPING
+            </button>
           </Link>
         </div>
       </div>
