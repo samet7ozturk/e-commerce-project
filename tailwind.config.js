@@ -14,6 +14,8 @@ module.exports = withMT({
         marquee2: "marquee2 25s linear infinite",
         basket: "basket 1s linear both",
         delete: "delete 1s linear both",
+        slide: "slide 1s linear both",
+        slide2: "slide2 1s linear both",
       },
       keyframes: {
         marquee: {
@@ -44,6 +46,28 @@ module.exports = withMT({
           "100%": {
             transform: "translateX(-100%) scale(0)",
             opacity: 0,
+          },
+        },
+        slide: {
+          "0%": {
+            transform: "translateX(0%) scaleX(1)",
+            borderRadius: "0",
+          },
+          "100%": {
+            transform: "translateX(85.7%) scaleX(0.65)",
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "10px",
+          },
+        },
+        slide2: {
+          "0%": {
+            transform: "translateX(85.7%) scaleX(0.65)",
+            borderRadius: "0",
+          },
+          "100%": {
+            transform: "translateX(0%) scaleX(1)",
+            borderTopLeftRadius: "10px",
+            borderBottomLeftRadius: "10px",
           },
         },
       },
