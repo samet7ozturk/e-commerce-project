@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addToCart } from "../store/actions/shoppingCartActions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import svg from "../assets/product-colors.svg";
 
 const ProductCard = ({ product }) => {
@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
   const link = useNavigate();
   const location = useLocation();
   const [isClicked, setIsClicked] = useState(false);
+  const [isClicked2, setIsClicked2] = useState(false);
   const token = localStorage.getItem("token");
 
   const turkishSlugify = (str) => {
@@ -53,6 +54,10 @@ const ProductCard = ({ product }) => {
   };
 
   const favorite = (product) => {
+    setIsClicked2(true);
+    setTimeout(() => {
+      setIsClicked2(false);
+    }, 700);
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let isFavorite = false;
 
@@ -74,7 +79,15 @@ const ProductCard = ({ product }) => {
       <div className="flex flex-col w-[238px] items-center border shadow-md hover:scale-105 hover:shadow-xl transition duration-300">
         <div className="absolute top-[1%] right-[4%]">
           <button onClick={() => favorite(product)}>
-            <FontAwesomeIcon icon={faHeart} className="cursor-pointer" />
+            <FontAwesomeIcon
+              icon={faHeart}
+              className={`cursor-pointer ${
+                isClicked2
+                  ? "animate-jump animate-once animate-duration-700"
+                  : ""
+              }`}
+              style={{ color: isClicked2 ? "#ff0000" : "#c1c1c1" }}
+            />
           </button>
         </div>
         <img src={product.images[0].url} alt={product.name} />
