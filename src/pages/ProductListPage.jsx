@@ -185,11 +185,16 @@ const ProductListPage = () => {
                 </option>
               </select>
             </label>
-            <label className="flex border-2 items-center p-2">
+            <label className="flex border-2 items-center p-2 text-[#737373] font-bold">
               Filter:
               <input type="text" {...register("filter")} className="w-20" />
             </label>
-            <button type="submit">Filter</button>
+            <button
+              type="submit"
+              className="border-[#23A6F0] w-20 bg-[#23A6F0] active:scale-110"
+            >
+              Filter
+            </button>
           </form>
         </div>
       </div>
