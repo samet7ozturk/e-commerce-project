@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginExit, loginUserVerify } from "../store/actions/userActions";
 
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhone,
@@ -39,6 +40,8 @@ const Header = () => {
   const [openMenu1, setOpenMenu1] = useState(false);
   const [openMenu2, setOpenMenu2] = useState(false);
   const [openMenu3, setOpenMenu3] = useState(false);
+  const [openMenu4, setOpenMenu4] = useState(false);
+  const [favoritesCount, setFavoritesCount] = useState(0);
   const categories = useSelector((store) => store.global.categories);
   const femaleCategories = categories.filter(
     (category) => category.gender === "k"
@@ -46,6 +49,8 @@ const Header = () => {
   const maleCategories = categories.filter(
     (category) => category.gender === "e"
   );
+
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
   const user = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
@@ -72,15 +77,19 @@ const Header = () => {
     dispatch(deleteProduct(cartItem));
   };
 
-  const calculateTotalPrice = (cart) => {
-    let totalPrice = 0;
-    for (const cartItem of cart) {
-      totalPrice += cartItem.product.price * cartItem.count;
-    }
-    return totalPrice;
+  const toggleFavorite = () => {
+    setOpenMenu4((favoriteOpen) => !favoriteOpen);
+    setFavoritesCount(favorites.length);
   };
 
-  const totalCartPrice = calculateTotalPrice(shoppingCart.cart).toFixed(2);
+  const deleteFavorite = (productId) => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavorites = favorites.filter(
+      (favoriteItem) => favoriteItem.id !== productId
+    );
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setFavoritesCount(updatedFavorites.length);
+  };
 
   useEffect(() => {
     if (token) {
@@ -95,6 +104,10 @@ const Header = () => {
         });
     }
   }, []);
+
+  useEffect(() => {
+    console.log("Favorites count changed:", favoritesCount);
+  }, [favoritesCount]);
 
   return (
     <main className="font-bold">
@@ -271,19 +284,12 @@ const Header = () => {
           <div className="flex items-center">
             <div className="flex gap-2">
               <button onClick={() => toggleBasket()}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="16"
-                  width="18"
-                  viewBox="0 0 576 512"
-                >
-                  <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                </svg>
+                <ShoppingCartIcon strokeWidth={1.7} className="h-5 w-5" />
               </button>
               <p>{shoppingCart.cart.length}</p>
             </div>
             {openMenu3 && (
-              <div className="flex flex-col z-10 bg-white border-2 absolute right-20 top-20 justify-between p-2 mt-8">
+              <div className="flex flex-col z-10 bg-white border-2 absolute right-[105px] top-20 justify-between p-2 mt-8">
                 <div className="flex flex-col h-[350px] w-[400px] overflow-auto gap-4">
                   <Link to="/shopping-cart-page">Sepete Git</Link>
                   {shoppingCart?.cart.map((cartItem) => (
@@ -331,6 +337,7 @@ const Header = () => {
                       <div>
                         <div variant="small" color="gray" className="">
                           <p className="text-[#252B42]">
+                            $
                             {(cartItem.product.price * cartItem.count).toFixed(
                               2
                             )}
@@ -350,10 +357,56 @@ const Header = () => {
             )}
           </div>
           <div className="flex items-center gap-2">
-            <Link to="/favorites">
-              <FontAwesomeIcon icon={faHeart} />
-            </Link>
-            <p>1</p>
+            <div className="flex gap-2">
+              <button onClick={() => toggleFavorite()}>
+                <FontAwesomeIcon icon={faHeart} />
+              </button>
+              <p>{favorites.length}</p>
+            </div>
+            {openMenu4 && (
+              <div className="flex flex-col z-10 bg-white border-2 absolute right-10 top-20 justify-between p-2 mt-8">
+                <div className="flex flex-col h-[350px] w-[350px] overflow-auto gap-4">
+                  {favorites.map((favoriteItem) => (
+                    <div
+                      key={favoriteItem.id}
+                      className="flex items-center gap-4 py-2 pl-2 border"
+                    >
+                      <div className="flex gap-4 items-center w-[200px]">
+                        <img
+                          src={favoriteItem.images[0].url}
+                          alt="Ürün Resmi"
+                          className="w-10 h-14"
+                        />
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="font-semibold flex items-center text-center text-[#252B42]"
+                        >
+                          {favoriteItem.name}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="w-[60px] text-center"
+                        >
+                          <p className="text-[#252B42]">
+                            Price ${favoriteItem.price}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => deleteFavorite(favoriteItem.id)}
+                        className="text-[#23A6F0]"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
