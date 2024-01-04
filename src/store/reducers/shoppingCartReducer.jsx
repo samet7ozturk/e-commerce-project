@@ -82,6 +82,25 @@ const shoppingCartReducer = (state = initialCartState, action) => {
         return state;
       }
 
+    case "CHECK_PRODUCT":
+      const checkedItemId = action.payload.id;
+      const updatedCartt = state.cart.map((item) => {
+        if (item.product.id === checkedItemId) {
+          return { ...item, checked: !item.checked };
+        }
+        return item;
+      });
+
+      localStorage.setItem(
+        "shoppingCart",
+        JSON.stringify({ ...state, cart: updatedCartt })
+      );
+
+      return {
+        ...state,
+        cart: updatedCartt,
+      };
+
     case "DELETE_PRODUCT":
       const updatedCart = state.cart.filter(
         (item) => item.product.id !== action.payload.id
