@@ -9,6 +9,7 @@ import {
   faPhone,
   faEnvelope,
   faMagnifyingGlass,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -267,76 +268,8 @@ const Header = () => {
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </Link>
 
-          <div className="flex items-center gap-2">
-            {openMenu3 ? (
-              <div className="flex flex-col z-10 bg-white absolute right-20 top-20 justify-between">
-                <button onClick={() => toggleBasket()}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="16"
-                    width="18"
-                    viewBox="0 0 576 512"
-                  >
-                    <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                  </svg>
-                </button>
-                <div className="flex flex-col gap-2">
-                  {shoppingCart?.cart.map((cartItem) => (
-                    <div
-                      key={cartItem.product.id}
-                      className="flex items-center gap-4 py-2 pl-2  border"
-                    >
-                      <div className="flex gap-1">
-                        <img
-                          src={cartItem.product.images[0].url}
-                          alt="Ürün Resmi"
-                          className="w-10 h-14"
-                        />
-                        <div
-                          variant="small"
-                          color="gray"
-                          className="font-semibold flex items-center text-[#737373] text-center"
-                        >
-                          {cartItem.product.name}
-                        </div>
-                      </div>
-                      <div>
-                        <div
-                          variant="small"
-                          color="gray"
-                          className="flex gap-2"
-                        >
-                          <p className="text-[#23A6F0] font-bold">Piece:</p>
-                          <button
-                            onClick={() => decreaseCount(cartItem.product)}
-                            className="border bg-[#23A6F0] w-4"
-                          >
-                            -
-                          </button>
-                          {cartItem.count}
-                          <button
-                            onClick={() => increaseCount(cartItem.product)}
-                            className="border w-4"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <div>
-                        <div variant="small" color="gray" className="">
-                          <p className="text-[#23A6F0] font-bold">Price</p>
-                          {(cartItem.product.price * cartItem.count).toFixed(2)}
-                        </div>
-                      </div>
-                      <button onClick={() => deleteItem(cartItem.product)}>
-                        Delete
-                      </button>
-                    </div>
-                  ))}
-                  {<p>Total Price: {totalCartPrice}</p>}
-                </div>
-              </div>
-            ) : (
+          <div className="flex items-center">
+            <div className="flex gap-2">
               <button onClick={() => toggleBasket()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -347,8 +280,78 @@ const Header = () => {
                   <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                 </svg>
               </button>
+              <p>{shoppingCart.cart.length}</p>
+            </div>
+            {openMenu3 && (
+              <div className="flex flex-col z-10 bg-white border-2 absolute right-20 top-20 justify-between p-2 mt-8">
+                <div className="flex flex-col h-[350px] w-[400px] overflow-auto gap-4">
+                  {shoppingCart?.cart.map((cartItem) => (
+                    <div
+                      key={cartItem.product.id}
+                      className="flex items-center gap-4 py-2 pl-2  border justify-between"
+                    >
+                      <div className="flex gap-4 items-center w-[240px]">
+                        <img
+                          src={cartItem.product.images[0].url}
+                          alt="Ürün Resmi"
+                          className="w-10 h-14"
+                        />
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="font-semibold flex items-center text-center text-[#252B42]"
+                        >
+                          {cartItem.product.name}
+                        </div>
+                      </div>
+                      <div className="flex">
+                        <div
+                          variant="small"
+                          color="gray"
+                          className="flex gap-2"
+                        >
+                          <p className="flex items-end text-[#23A6F0] font-bold">
+                            Piece:
+                          </p>
+                          <button
+                            onClick={() => decreaseCount(cartItem.product)}
+                            className="border bg-gray-300 text-[#737373] w-4"
+                          >
+                            -
+                          </button>
+                          <p className="flex items-end text-[#252B42]">
+                            {cartItem.count}
+                          </p>
+                          <button
+                            onClick={() => increaseCount(cartItem.product)}
+                            className="border bg-gray-300 text-[#737373] w-4"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <div variant="small" color="gray" className="">
+                          <p className="text-[#23A6F0] font-bold">Price</p>
+                          <p className="text-[#252B42]">
+                            {(cartItem.product.price * cartItem.count).toFixed(
+                              2
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => deleteItem(cartItem.product)}
+                        className="pr-4 text-[#23A6F0]"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  ))}
+                  <Link to="/shopping-cart-page">Sepete Git</Link>
+                </div>
+              </div>
             )}
-            <p>{shoppingCart.cart.length}</p>
           </div>
           <div className="flex items-center gap-2">
             <Link to="/favorites">
