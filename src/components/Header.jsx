@@ -285,6 +285,7 @@ const Header = () => {
             {openMenu3 && (
               <div className="flex flex-col z-10 bg-white border-2 absolute right-20 top-20 justify-between p-2 mt-8">
                 <div className="flex flex-col h-[350px] w-[400px] overflow-auto gap-4">
+                  <Link to="/shopping-cart-page">Sepete Git</Link>
                   {shoppingCart?.cart.map((cartItem) => (
                     <div
                       key={cartItem.product.id}
@@ -310,12 +311,9 @@ const Header = () => {
                           color="gray"
                           className="flex gap-2"
                         >
-                          <p className="flex items-end text-[#23A6F0] font-bold">
-                            Piece:
-                          </p>
                           <button
                             onClick={() => decreaseCount(cartItem.product)}
-                            className="border bg-gray-300 text-[#737373] w-4"
+                            className="text-[#23A6F0] w-4 h-4"
                           >
                             -
                           </button>
@@ -324,7 +322,7 @@ const Header = () => {
                           </p>
                           <button
                             onClick={() => increaseCount(cartItem.product)}
-                            className="border bg-gray-300 text-[#737373] w-4"
+                            className="text-[#23A6F0] w-4 h-4"
                           >
                             +
                           </button>
@@ -332,7 +330,6 @@ const Header = () => {
                       </div>
                       <div>
                         <div variant="small" color="gray" className="">
-                          <p className="text-[#23A6F0] font-bold">Price</p>
                           <p className="text-[#252B42]">
                             {(cartItem.product.price * cartItem.count).toFixed(
                               2
@@ -348,7 +345,6 @@ const Header = () => {
                       </button>
                     </div>
                   ))}
-                  <Link to="/shopping-cart-page">Sepete Git</Link>
                 </div>
               </div>
             )}
