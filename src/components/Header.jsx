@@ -291,7 +291,7 @@ const Header = () => {
             {openMenu3 && (
               <div className="flex flex-col z-10 bg-white border-2 absolute right-[105px] top-20 justify-between p-2 mt-8">
                 <div className="flex flex-col h-[350px] w-[400px] overflow-auto gap-4">
-                  <Link to="/shopping-cart-page">Sepete Git</Link>
+                  <Link to="/shopping-cart-page">Go to Cart</Link>
                   {shoppingCart?.cart.map((cartItem) => (
                     <div
                       key={cartItem.product.id}
