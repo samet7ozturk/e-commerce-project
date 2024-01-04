@@ -5,12 +5,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {
   addToCart,
+  checkProduct,
   decrease,
   deleteProduct,
 } from "../store/actions/shoppingCartActions";
 
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ShoppingCartPage = () => {
   const dispatch = useDispatch();
@@ -34,15 +36,14 @@ const ShoppingCartPage = () => {
     }, 1000);
   };
 
-  const calculateTotalPrice = (cart) => {
-    let totalPrice = 0;
-    for (const cartItem of cart) {
-      totalPrice += cartItem.product.price * cartItem.count;
-    }
-    return totalPrice;
+  const toggleChecked = (cartItem) => {
+    dispatch(checkProduct(cartItem.product));
   };
 
-  const totalCartPrice = calculateTotalPrice(shoppingCart.cart).toFixed(2);
+  let totalPrice = shoppingCart.cart
+    .filter((item) => item.checked == true)
+    .reduce((total, item) => total + item.product.price * item.count, 0)
+    .toFixed(2);
 
   return (
     <main className=" font-montserrat">
@@ -57,7 +58,12 @@ const ShoppingCartPage = () => {
                 deletedItemId === cartItem.product.id ? "animate-delete" : ""
               }`}
             >
-              <input type="checkbox" id={`checkbox-${cartItem.product.id}`} />
+              <input
+                type="checkbox"
+                id={`checkbox-${cartItem.product.id}`}
+                checked={cartItem.checked}
+                onChange={() => toggleChecked(cartItem)}
+              />
               <div className="flex items-center py-2 pl-2 border-2 justify-between w-[600px]">
                 <div className="flex gap-4 items-center w-[240px]">
                   <img
@@ -108,9 +114,13 @@ const ShoppingCartPage = () => {
         <div className="border-2 w-[350px] text-center bg-white shadow-sm">
           <div className="text-[#737373] font-bold">Order Summary</div>
           <div className="font-bold">Shipping: $10</div>
-          {<p className="font-bold">Total Price: ${totalCartPrice}</p>}
-          <button className="border-2 w-[150px]">PROCEED TO CHECKOUT</button>
-          <button className="border-2 w-[150px]">CONTINUE SHOPPING</button>
+          {<p className="font-bold">Total Price: ${totalPrice}</p>}
+          <Link to="/order-page">
+            <button className="border-2 w-[150px]">PROCEED TO CHECKOUT</button>
+          </Link>
+          <Link to="/shopping">
+            <button className="border-2 w-[150px]">CONTINUE SHOPPING</button>
+          </Link>
         </div>
       </div>
 
