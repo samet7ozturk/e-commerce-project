@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { addToCart } from "../store/actions/shoppingCartActions";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import svg from "../assets/product-colors.svg";
 
 const ProductCard = ({ product }) => {
@@ -50,9 +52,32 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const favorite = (product) => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let isFavorite = false;
+
+    for (const favoriteItem of favorites) {
+      if (favoriteItem.id === product.id) {
+        isFavorite = true;
+        break;
+      }
+    }
+
+    if (!isFavorite) {
+      favorites.push(product);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
+
   return (
     <div className="relative">
       <div className="flex flex-col w-[238px] items-center border shadow-md hover:scale-105 hover:shadow-xl transition duration-300">
+        <div className="absolute top-[1%] right-[4%]">
+          <button onClick={() => favorite(product)}>
+            <FontAwesomeIcon icon={faHeart} className="cursor-pointer" />
+          </button>
+        </div>
+        <img src={product.images[0].url} alt={product.name} />
         <Link
           to={`/product-page/${
             product.category_id === 1
@@ -65,17 +90,17 @@ const ProductCard = ({ product }) => {
           }/${product.id}/${turkishSlugify(product.name)}`}
           className="flex flex-col items-center text-center"
         >
-          <img src={product.images[0].url} alt={product.name} />
           <h2 className="text-[#252B42] text-base font-bold pt-8 pb-4">
             {product.name}
           </h2>
-          <div className="flex gap-2 pb-4">
-            <p className="text-[#BDBDBD] text-sm font-bold tracking-wider">
-              ${product.price}
-            </p>
-          </div>
-          <img src={svg} alt="svg" className="cursor-pointer pb-8" />
         </Link>
+        <div className="flex gap-2 pb-4">
+          <p className="text-[#BDBDBD] text-sm font-bold tracking-wider">
+            ${product.price}
+          </p>
+        </div>
+        <img src={svg} alt="svg" className="cursor-pointer pb-8" />
+
         <button
           onClick={() => handleAddToCart(product)}
           className="bg-blue-500 text-white p-2 rounded-md cursor-pointer mb-8"
@@ -105,9 +130,6 @@ const ProductCard = ({ product }) => {
             <h2 className="text-[#252B42] text-base font-bold pt-8 pb-4">
               {product.name}
             </h2>
-            <p className="text-[#737373] text-sm font-bold pb-4">
-              {product.description}
-            </p>
             <div className="flex gap-2 pb-4">
               <p className="text-[#BDBDBD] text-sm font-bold">
                 ₺{product.price}
