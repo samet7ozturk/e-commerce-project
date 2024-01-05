@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { instanceAxios } from "../api/api";
 import { loginExit, loginUserVerify } from "../store/actions/userActions";
+import {
+  addToCart,
+  decrease,
+  deleteBasket,
+  deleteProduct,
+} from "../store/actions/shoppingCartActions";
 
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
@@ -24,25 +32,19 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
-  Typography,
 } from "@material-tailwind/react";
-import { instanceAxios } from "../api/api";
-import {
-  addToCart,
-  decrease,
-  deleteProduct,
-} from "../store/actions/shoppingCartActions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const shoppingCart = useSelector((state) => state.shoppingCart);
-
   const [openMenu1, setOpenMenu1] = useState(false);
   const [openMenu2, setOpenMenu2] = useState(false);
   const [openMenu3, setOpenMenu3] = useState(false);
   const [openMenu4, setOpenMenu4] = useState(false);
   const [favoritesCount, setFavoritesCount] = useState(0);
+
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   const categories = useSelector((store) => store.global.categories);
+
   const femaleCategories = categories.filter(
     (category) => category.gender === "k"
   );
@@ -58,7 +60,9 @@ const Header = () => {
 
   const tokenDelete = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("favorites");
     dispatch(loginExit());
+    dispatch(deleteBasket());
   };
 
   const toggleBasket = () => {

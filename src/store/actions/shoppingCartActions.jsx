@@ -17,3 +17,8 @@ export const checkProduct = (data) => ({
   type: "CHECK_PRODUCT",
   payload: data,
 });
+
+export const deleteBasket = (data) => ({
+  type: "DELETE_BASKET",
+  payload: data,
+});

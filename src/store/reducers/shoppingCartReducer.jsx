@@ -114,6 +114,12 @@ const shoppingCartReducer = (state = initialCartState, action) => {
         cart: updatedCart,
       };
 
+    case "DELETE_BASKET":
+      return {
+        ...state,
+        cart: initialState.cart,
+      };
+
     default:
       return state;
   }
