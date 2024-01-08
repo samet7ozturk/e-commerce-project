@@ -46,10 +46,10 @@ const ShoppingCartPage = () => {
     .toFixed(2);
 
   return (
-    <main className=" font-montserrat">
+    <main className="font-montserrat">
       <Header />
       <div className="flex justify-evenly bg-[#fafafa] py-12">
-        <div className="flex flex-col border-2 p-10 bg-white shadow-sm w-[750px] gap-6">
+        <div className="h-[700px] overflow-auto flex flex-col border-2 p-10 bg-white shadow-sm w-[750px] gap-6">
           <p className="text-[#737373] font-bold">Cart Items</p>
           {shoppingCart?.cart.map((cartItem) => (
             <div
@@ -162,7 +162,6 @@ const ShoppingCartPage = () => {
           </Link>
         </div>
       </div>
-
       <Footer />
     </main>
   );
