@@ -13,6 +13,7 @@ module.exports = withMT({
         marquee: "marquee 25s linear infinite",
         marquee2: "marquee2 25s linear infinite",
         basket: "basket 1s linear both",
+        basket2: "basket2 1s linear both",
         delete: "delete 1s linear both",
         slide: "slide 1s linear both",
         slide2: "slide2 1s linear both",
@@ -38,6 +39,16 @@ module.exports = withMT({
             top: "0",
             transform: "translateX(100%) translateY(-100%) scale(0)",
             opacity: 0,
+          },
+        },
+        basket2: {
+          "0%": {
+            transform: "translateX(0%) translateY(0%) scale(1)",
+            opacity: 1,
+          },
+          "100%": {
+            transform: "translateX(105%) translateY(4%) scale(0)",
+            opacity: 0.3,
           },
         },
         delete: {
