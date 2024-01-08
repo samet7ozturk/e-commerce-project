@@ -21,6 +21,7 @@ module.exports = withMT({
         slide2: "slide2 1s linear both",
         dropdown: "dropdown 0.5s linear both",
         dropdown2: "dropdown2 0.5s linear both",
+        car: "car 2s linear infinite",
       },
       keyframes: {
         marquee: {
@@ -142,6 +143,23 @@ module.exports = withMT({
             transform: "scaleX(0) scaleY(0)",
             transformOrigin: "100% 0%",
             opacity: "0",
+          },
+        },
+        car: {
+          "0%": {
+            transform: "translateY(0%)",
+          },
+          "25%": {
+            transform: "translateY(5%)",
+          },
+          "50%": {
+            transform: "translateY(-10%)",
+          },
+          "75%": {
+            transform: "translateY(5%)",
+          },
+          "100%": {
+            transform: "translateY(0%)",
           },
         },
       },

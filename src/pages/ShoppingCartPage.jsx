@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Progress } from "@material-tailwind/react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -10,7 +11,7 @@ import {
   deleteProduct,
 } from "../store/actions/shoppingCartActions";
 
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faTruckFast } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -48,6 +49,23 @@ const ShoppingCartPage = () => {
   return (
     <main className="font-montserrat">
       <Header />
+      <div className="flex px-[13%] pt-4 justify-between">
+        <div>
+          <div className="font-semibold">SHOPPING CART</div>
+          <div className="text-center pt-2">
+            <FontAwesomeIcon
+              icon={faTruckFast}
+              className="w-8 h-8 animate-car"
+            />
+          </div>
+        </div>
+        <div className="font-semibold">SHIPPING ADDRESS</div>
+        <div className="font-semibold">PAYMENT</div>
+        <div className="font-semibold">REWIEW ORDER</div>
+      </div>
+      <div className="flex px-[7%] w-full flex-col gap-4">
+        <Progress value={25} color="blue" className="" />
+      </div>
       <div className="flex justify-evenly bg-[#fafafa] py-12">
         <div className="h-[700px] overflow-auto flex flex-col border-2 p-10 bg-white shadow-sm w-[750px] gap-6">
           <p className="text-[#737373] font-bold">Cart Items</p>
