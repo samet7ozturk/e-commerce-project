@@ -103,10 +103,10 @@ const ProductPage = () => {
       )}
       <Header />
       <div className="bg-[#FAFAFA] pb-10">
-        <button className="px-[10%] pt-8" onClick={handleGoBack}>
-          <ArrowLeftCircleIcon className="h-8 w-8 text-blue-500" />
-        </button>
         <div className="flex gap-4 px-[10%] h-[92px] items-center justify-center xl:justify-start">
+          <button className="pr-4" onClick={handleGoBack}>
+            <ArrowLeftCircleIcon className="h-8 w-8 text-blue-500" />
+          </button>
           <p className="text-[#252B42] text-sm font-bold">Home</p>
           <img src={svg1} alt="svg1" />
           <p className="text-[#BDBDBD] text-sm font-bold">Shop</p>
