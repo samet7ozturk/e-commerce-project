@@ -16,6 +16,8 @@ module.exports = withMT({
         delete: "delete 1s linear both",
         slide: "slide 1s linear both",
         slide2: "slide2 1s linear both",
+        dropdown: "dropdown 0.5s linear both",
+        dropdown2: "dropdown2 0.5s linear both",
       },
       keyframes: {
         marquee: {
@@ -68,6 +70,40 @@ module.exports = withMT({
             transform: "translateX(0%) scaleX(1)",
             borderTopLeftRadius: "10px",
             borderBottomLeftRadius: "10px",
+          },
+        },
+        dropdown: {
+          "0%": {
+            transform: "scaleX(0) scaleY(0)",
+            transformOrigin: "100% 0%",
+            opacity: "0",
+          },
+          "70%": {
+            transform: "scaleX(1) scaleY(0.5)",
+            transformOrigin: "100% 0%",
+            opacity: "0.7",
+          },
+          "100%": {
+            transform: "scaleX(1) scaleY(1)",
+            transformOrigin: "100% 0%",
+            opacity: "1",
+          },
+        },
+        dropdown2: {
+          "0%": {
+            transform: "scaleX(1) scaleY(1)",
+            transformOrigin: "100% 0%",
+            opacity: "1",
+          },
+          "70%": {
+            transform: "scaleX(1) scaleY(0.5)",
+            transformOrigin: "100% 0%",
+            opacity: "0.7",
+          },
+          "100%": {
+            transform: "scaleX(0) scaleY(0)",
+            transformOrigin: "100% 0%",
+            opacity: "0",
           },
         },
       },

@@ -19,6 +19,7 @@ import {
   faEnvelope,
   faMagnifyingGlass,
   faTrash,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -281,9 +282,10 @@ const Header = () => {
               </>
             )}
           </div>
-          <Link to="/search">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </Link>
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="cursor-pointer"
+          />
 
           <div className="flex items-center">
             <div className="flex gap-2">
@@ -292,73 +294,77 @@ const Header = () => {
               </button>
               <p>{shoppingCart.cart.length}</p>
             </div>
-            {openMenu3 && (
-              <div className="flex flex-col z-10 bg-white border-2 absolute right-[105px] top-20 justify-between p-2 mt-8">
-                <div className="flex flex-col h-[350px] w-[400px] overflow-auto gap-4">
-                  <Link to="/shopping-cart-page">Go to Cart</Link>
-                  {shoppingCart?.cart.map((cartItem) => (
-                    <div
-                      key={cartItem.product.id}
-                      className="flex items-center gap-4 py-2 pl-2  border justify-between"
-                    >
-                      <div className="flex gap-4 items-center w-[240px]">
-                        <img
-                          src={cartItem.product.images[0].url}
-                          alt="Ürün Resmi"
-                          className="w-10 h-14"
-                        />
-                        <div
-                          variant="small"
-                          color="gray"
-                          className="font-semibold flex items-center text-center text-[#252B42]"
-                        >
-                          {cartItem.product.name}
-                        </div>
-                      </div>
-                      <div className="flex">
-                        <div
-                          variant="small"
-                          color="gray"
-                          className="flex gap-2"
-                        >
-                          <button
-                            onClick={() => decreaseCount(cartItem.product)}
-                            className="text-[#23A6F0] w-4 h-4"
-                          >
-                            -
-                          </button>
-                          <p className="flex items-end text-[#252B42]">
-                            {cartItem.count}
-                          </p>
-                          <button
-                            onClick={() => increaseCount(cartItem.product)}
-                            className="text-[#23A6F0] w-4 h-4"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <div>
-                        <div variant="small" color="gray" className="">
-                          <p className="text-[#252B42]">
-                            $
-                            {(cartItem.product.price * cartItem.count).toFixed(
-                              2
-                            )}
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => deleteItem(cartItem.product)}
-                        className="pr-4 text-[#23A6F0]"
+
+            <div
+              className={`flex flex-col z-10 bg-white border-2 absolute right-[105px] top-20 justify-between p-2 mt-8 ${
+                openMenu3 ? "animate-dropdown" : "animate-dropdown2"
+              }`}
+            >
+              <div className="flex flex-col max-h-[350px] w-[350px] overflow-auto gap-2 font-normal">
+                {shoppingCart?.cart.map((cartItem) => (
+                  <div
+                    key={cartItem.product.id}
+                    className="flex items-center gap-4 py-2 pl-2 border-dashed border-b-2 border-blue-100 justify-between last:border-b-0 hover:bg-blue-100"
+                  >
+                    <div className="flex gap-4 items-center w-[240px]">
+                      <img
+                        src={cartItem.product.images[0].url}
+                        alt="Ürün Resmi"
+                        className="w-10 h-14"
+                      />
+                      <div
+                        variant="small"
+                        color="gray"
+                        className="flex items-center text-center text-[#252B42] text-sm"
                       >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
+                        {cartItem.product.name}
+                      </div>
                     </div>
-                  ))}
-                </div>
+                    <div className="flex">
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => decreaseCount(cartItem.product)}
+                          className="text-[#23A6F0] w-4   justify-center items-center flex"
+                        >
+                          -
+                        </button>
+                        <p className="flex items-end text-[#252B42] text-sm">
+                          {cartItem.count}
+                        </p>
+                        <button
+                          onClick={() => increaseCount(cartItem.product)}
+                          className="text-[#23A6F0] w-4  justify-center items-center flex"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm">
+                        <p className="text-[#252B42]">
+                          $
+                          {(cartItem.product.price * cartItem.count).toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => deleteItem(cartItem.product)}
+                      className="pr-4 text-[#23A6F0]"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                ))}
               </div>
-            )}
+              <Link to="/shopping-cart-page">
+                <div className="flex items-center justify-end bg-[#ebebeb] border rounded font-semibold py-2 pr-2">
+                  <div className="flex gap-2 hover:scale-105">
+                    <p>Go to Cart</p>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex gap-2">
