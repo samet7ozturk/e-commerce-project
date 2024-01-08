@@ -14,6 +14,8 @@ module.exports = withMT({
         marquee2: "marquee2 25s linear infinite",
         basket: "basket 1s linear both",
         basket2: "basket2 1s linear both",
+        favorite: "favorite 1s linear both",
+        grow: "grow 1s linear both",
         delete: "delete 1s linear both",
         slide: "slide 1s linear both",
         slide2: "slide2 1s linear both",
@@ -49,6 +51,31 @@ module.exports = withMT({
           "100%": {
             transform: "translateX(105%) translateY(4%) scale(0)",
             opacity: 0.3,
+          },
+        },
+        favorite: {
+          "0%": {
+            transform: "scale(1)",
+            opacity: 1,
+          },
+          "20%": {
+            transform: "scale(1.2)",
+            opacity: 1,
+          },
+          "100%": {
+            transform: "scale(0)",
+            opacity: 0,
+          },
+        },
+        grow: {
+          "0%": {
+            transform: "translateX(100%) translateY(0%) scale(1)",
+          },
+          "20%": {
+            transform: "translateX(100%) translateY(0%) scale(1.3)",
+          },
+          "100%": {
+            transform: "translateX(100%) translateY(0%) scale(1.3)",
           },
         },
         delete: {

@@ -24,6 +24,7 @@ import {
   faStar,
   faStarHalfAlt,
   faCheck,
+  faHeart as heart,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faStar as faStarRegular,
@@ -40,6 +41,8 @@ const ProductPage = () => {
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [isClicked, setIsClicked] = useState(false);
+  const [isClicked2, setIsClicked2] = useState(false);
+  const [isClicked3, setIsClicked3] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -49,6 +52,10 @@ const ProductPage = () => {
 
   const handleColorButtonClick = (color) => {
     setSelectedColor(color);
+  };
+
+  const handleInspect = () => {
+    setIsClicked3((inspect) => !inspect);
   };
 
   const handleAddToCart = (product) => {
@@ -64,12 +71,36 @@ const ProductPage = () => {
     }
   };
 
+  const favorite = (product) => {
+    setIsClicked2(true);
+    setTimeout(() => {
+      setIsClicked2(false);
+    }, 700);
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let isFavorite = false;
+
+    for (const favoriteItem of favorites) {
+      if (favoriteItem.id === product.id) {
+        isFavorite = true;
+        break;
+      }
+    }
+
+    if (!isFavorite) {
+      favorites.push(product);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchSingleProduct(searchParams.productId));
   }, [searchParams]);
 
   return product.name ? (
-    <main className=" font-montserrat">
+    <main className="font-montserrat">
+      {isClicked3 && (
+        <div className="absolute bg-gray-700 h-[200vh] w-[200vh]"></div>
+      )}
       <Header />
       <div className="bg-[#FAFAFA] pb-10">
         <button className="px-[10%] pt-8" onClick={handleGoBack}>
@@ -81,15 +112,24 @@ const ProductPage = () => {
           <p className="text-[#BDBDBD] text-sm font-bold">Shop</p>
         </div>
         <div className="flex px-[10%] gap-4 flex-col xl:flex-row">
-          <div className="flex w-full xl:w1/2">
+          <div className="flex relative w-full justify-center">
             <img
               src={product?.images[0].url}
               alt="img1"
-              className={`h-[650px]`}
+              className={`h-[650px] ${isClicked3 && "animate-grow z-10"}`}
+              onClick={() => handleInspect()}
             />
+            {isClicked2 && (
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <FontAwesomeIcon
+                  icon={heart}
+                  className="w-52 h-52 text-red-700 animate-favorite"
+                />
+              </div>
+            )}
           </div>
           {isClicked && (
-            <div className="flex w-full xl:w1/2 absolute">
+            <div className="flex w-full absolute">
               <img
                 src={product?.images[0].url}
                 alt="img1"
@@ -97,7 +137,7 @@ const ProductPage = () => {
               />
             </div>
           )}
-          <div className="flex flex-col w-full xl:w1/2">
+          <div className="flex flex-col w-full">
             <h2 className="text-[#252B42] text-xl pt-4">{product.name}</h2>
             <div className="pt-[13px]">
               <div class="flex items-center">
@@ -199,14 +239,19 @@ const ProductPage = () => {
                 </button>
               </div>
               <div className="flex gap-2">
-                <div className="flex justify-center items-center bg-white border rounded-full w-10 h-10 cursor-pointer">
+                <button
+                  onClick={() => favorite(product)}
+                  className="flex justify-center items-center bg-white border rounded-full w-10 h-10 cursor-pointer"
+                >
                   <FontAwesomeIcon icon={faHeart} />
-                </div>
+                </button>
 
                 <button onClick={() => handleAddToCart(product)}>
                   <img src={svg6} alt="svg6" className="cursor-pointer" />
                 </button>
-                <img src={svg7} alt="svg7" className="cursor-pointer" />
+                <button onClick={() => handleInspect()}>
+                  <img src={svg7} alt="svg7" className="cursor-pointer" />
+                </button>
               </div>
             </div>
           </div>
