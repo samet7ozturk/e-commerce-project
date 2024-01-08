@@ -1,5 +1,6 @@
 const initialState = {
   productList: [],
+  product: {},
   totalProductCount: 0,
   pageCount: 0,
   activePage: 1,
@@ -28,6 +29,13 @@ const productReducer = (state = initialState, action) => {
         totalProductCount: action.payload.total,
         productList: [...state.productList, ...action.payload.products],
         fetchState: "sadas",
+      };
+
+    case "FETCH_PRODUCT":
+      return {
+        ...state,
+        product: action.payload,
+        fetchState: "FETCHED",
       };
 
     default:

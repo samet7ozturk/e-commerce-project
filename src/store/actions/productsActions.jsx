@@ -17,3 +17,8 @@ export const fetchMore = (data) => ({
   type: "FETCH_MORE",
   payload: data,
 });
+
+export const fetchProduct = (data) => ({
+  type: "FETCH_PRODUCT",
+  payload: data,
+});

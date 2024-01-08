@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 
 import Header from "../components/Header";
 import BestSellerProduct1 from "../layout/BestSellerProducts1";
@@ -20,13 +21,24 @@ import svg11 from "../assets/stripe.svg";
 import svg12 from "../assets/aws.svg";
 import svg13 from "../assets/reddit.svg";
 import img1 from "../assets/product-page-1.png";
+import { useEffect } from "react";
+import { fetchSingleProduct } from "../store/thunks/productsThunk";
 
 const ProductPage = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
+  const searchParams = useParams();
+  const product = useSelector((state) => state.products.product);
+  console.log("param :", searchParams.productId);
+  console.log("product :", product);
 
   const handleGoBack = () => {
     history(-1);
   };
+
+  useEffect(() => {
+    dispatch(fetchSingleProduct(searchParams.productId));
+  }, [searchParams]);
 
   return (
     <main className=" font-montserrat">
