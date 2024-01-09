@@ -49,9 +49,9 @@ const ShoppingCartPage = () => {
   return (
     <main className="font-montserrat">
       <Header />
-      <div className="flex px-[13%] pt-4 justify-between">
+      <div className="bg-[#fafafa] flex px-[13%] pt-4 justify-between">
         <div>
-          <div className="font-semibold">SHOPPING CART</div>
+          <div className="font-semibold text-[#23A6F0]">SHOPPING CART</div>
           <div className="text-center pt-2">
             <FontAwesomeIcon
               icon={faTruckFast}
@@ -59,15 +59,15 @@ const ShoppingCartPage = () => {
             />
           </div>
         </div>
-        <div className="font-semibold">SHIPPING ADDRESS</div>
-        <div className="font-semibold">PAYMENT</div>
-        <div className="font-semibold">REWIEW ORDER</div>
+        <div className="font-semibold text-[#23A6F0]">SHIPPING ADDRESS</div>
+        <div className="font-semibold text-[#23A6F0]">PAYMENT</div>
+        <div className="font-semibold text-[#23A6F0]">REWIEW ORDER</div>
       </div>
-      <div className="flex px-[7%] w-full flex-col gap-4">
+      <div className="flex px-[7%] w-full flex-col gap-4 bg-[#fafafa]">
         <Progress value={25} color="blue" className="" />
       </div>
       <div className="flex justify-evenly bg-[#fafafa] py-12">
-        <div className="h-[700px] overflow-auto flex flex-col border-2 p-10 bg-white shadow-sm w-[750px] gap-6">
+        <div className="h-[670px] overflow-auto flex flex-col border-2 p-10 bg-white shadow-sm w-[750px] gap-6">
           <p className="text-[#737373] font-bold">Cart Items</p>
           {shoppingCart?.cart.map((cartItem) => (
             <div
@@ -130,7 +130,7 @@ const ShoppingCartPage = () => {
           ))}
         </div>
         <div className="flex flex-col justify-center gap-6 border-2 w-[350px] text-center bg-white shadow-sm px-[5%]">
-          <div className="text-[#23A6F0] font-bold">Order Summary</div>
+          <div className="text-[#23A6F0] font-bold pb-16">Order Summary</div>
           <div className="flex font-bold justify-between">
             <p className="text-[#737373]">Shipping:</p>
             {totalPrice > "200" ? (
@@ -158,7 +158,7 @@ const ShoppingCartPage = () => {
 
           <hr />
           {
-            <div className="flex justify-between">
+            <div className="flex justify-between pb-10">
               <p className="font-bold text-[#737373]">Total Price:</p>
               <p className="font-bold">
                 $
@@ -169,12 +169,12 @@ const ShoppingCartPage = () => {
             </div>
           }
           <Link to="/order-page">
-            <button className="bg-blue-300 w-[150px] hover:scale-105 transition duration-300">
+            <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
               PROCEED TO CHECKOUT
             </button>
           </Link>
           <Link to="/shopping">
-            <button className="bg-blue-300 w-[150px] hover:scale-105 transition duration-300">
+            <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
               CONTINUE SHOPPING
             </button>
           </Link>
