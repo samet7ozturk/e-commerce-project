@@ -11,12 +11,14 @@ import userReducer from "./reducers/userReducer";
 import productReducer from "./reducers/productReducer";
 import shoppingCartReducer from "./reducers/shoppingCartReducer";
 import storeReducer from "./reducers/storeReducer";
+import paymentReducer from "./reducers/paymentReducer";
 
 const rootReducer = combineReducers({
   global: globalReducer,
   user: userReducer,
   products: productReducer,
   shoppingCart: shoppingCartReducer,
+  payment: paymentReducer,
   store: storeReducer,
 });
 
