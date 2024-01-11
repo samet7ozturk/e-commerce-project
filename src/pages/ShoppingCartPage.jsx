@@ -11,7 +11,12 @@ import {
   deleteProduct,
 } from "../store/actions/shoppingCartActions";
 
-import { faTrash, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretLeft,
+  faCaretRight,
+  faTrash,
+  faTruckFast,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -168,14 +173,39 @@ const ShoppingCartPage = () => {
               </p>
             </div>
           }
-          <Link to="/order-page">
-            <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
-              PROCEED TO CHECKOUT
-            </button>
-          </Link>
+          {parseFloat(totalPrice) !== 0 ? (
+            <div>
+              <Link to="/order-page">
+                <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
+                  <div className="flex items-center">
+                    <p>PROCEED TO PAYMENT</p>
+                    <FontAwesomeIcon
+                      icon={faCaretRight}
+                      className="w-6 h-6 pr-2"
+                    />
+                  </div>
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <button className="bg-blue-300 w-[150px] py-2 rounded cursor-not-allowed opacity-50">
+                <div className="flex items-center">
+                  <p>PROCEED TO PAYMENT</p>
+                  <FontAwesomeIcon
+                    icon={faCaretRight}
+                    className="w-6 h-6 pr-2"
+                  />
+                </div>
+              </button>
+            </div>
+          )}
           <Link to="/shopping">
             <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
-              CONTINUE SHOPPING
+              <div className="flex items-center">
+                <FontAwesomeIcon icon={faCaretLeft} className="w-6 h-6 pl-2" />
+                <p>CONTINUE SHOPPING</p>
+              </div>
             </button>
           </Link>
         </div>
