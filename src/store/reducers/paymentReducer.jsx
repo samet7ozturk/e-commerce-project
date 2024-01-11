@@ -1,12 +1,16 @@
 const initialState = {
   address: [],
-  categories: [],
+  card: [],
 };
 
 const paymentReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADDRESS_DATA":
+    case "ADD_ADDRESS":
+      return { ...state, address: [...state.address, action.payload] };
+    case "SET_ADDRESS":
       return { ...state, address: action.payload };
+    case "SET_CARD":
+      return { ...state, card: action.payload };
     default:
       return state;
   }
