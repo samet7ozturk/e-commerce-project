@@ -16,32 +16,48 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { setAddressData } from "../store/actions/paymentActions";
+import {
+  addAddressData,
+  setAddressData,
+} from "../store/actions/paymentActions";
+import axios from "axios";
 
 const OrderPage = () => {
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
-  const address = useSelector((state) => state.payment);
+  const address = useSelector((state) => state.payment.address);
   console.log("adres :", address.address);
 
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors },
   } = useForm();
 
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
+  const [provinceData, setProvinceData] = useState();
+  const [city, setCity] = useState("");
+  const [districts, setDistricts] = useState([]);
+
+  const cityNames = provinceData?.map((city) => city.name);
 
   const addAddressForm = () => {
     setShowAddAddressForm((form) => !form);
   };
 
+  function handleCityChange(e) {
+    const selectedCity = e.target.value;
+    setCity(selectedCity);
+    setValue("city", selectedCity, { shouldValidate: true });
+  }
+
   const onSubmit = (data) => {
     instanceAxios
       .post("/user/address", data)
-      .then((response) => {
-        dispatch(setAddressData(response.data));
+      .then(() => {
+        dispatch(addAddressData({ ...data }));
         reset();
       })
       .catch((error) => {
@@ -65,6 +81,24 @@ const OrderPage = () => {
         console.error(error);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://turkiyeapi.dev/api/v1/provinces")
+      .then((response) => {
+        setProvinceData(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const activeCity = provinceData?.find((item) => item.name == city);
+    const districts = activeCity?.districts.map((district) => district.name);
+    setDistricts(districts);
+  }, [city]);
+
   return address ? (
     <main className=" font-montserrat">
       <Header />
@@ -152,16 +186,33 @@ const OrderPage = () => {
                 </label>
                 <label>
                   City
-                  <input {...register("city")} className="border w-[170px]" />
+                  <select
+                    {...register("city")}
+                    onChange={handleCityChange}
+                    value={city}
+                    className="border w-[170px]"
+                  >
+                    {cityNames?.map((city) => (
+                      <option value={city} key={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
               <div className="flex justify-between gap-4">
                 <label>
                   District
-                  <input
+                  <select
                     {...register("district")}
                     className="border w-[170px]"
-                  />
+                  >
+                    {districts?.map((district) => (
+                      <option value={district} key={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
                 </label>
                 <label>
                   Neighborhood
@@ -208,7 +259,7 @@ const OrderPage = () => {
               </div>
             </form>
           )}
-          {address?.address?.map((addressItem, index) => (
+          {address?.map((addressItem, index) => (
             <button
               key={index}
               className="flex flex-col border p-2 w-[300px] h-[150px] justify-between"
@@ -275,7 +326,7 @@ const OrderPage = () => {
               </p>
             </div>
           }
-          <Link to="/order-page">
+          <Link to="/payment-page">
             <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
               PROCEED TO CHECKOUT
             </button>
