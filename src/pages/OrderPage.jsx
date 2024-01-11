@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { instanceAxios } from "../api/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Progress } from "@material-tailwind/react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -14,13 +15,15 @@ import {
   faUser,
   faPhone,
   faPlus,
+  faCircleXmark,
+  faCaretRight,
+  faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import {
   addAddressData,
   setAddressData,
 } from "../store/actions/paymentActions";
-import axios from "axios";
+import { Progress } from "@material-tailwind/react";
 
 const OrderPage = () => {
   const dispatch = useDispatch();
@@ -37,6 +40,8 @@ const OrderPage = () => {
   } = useForm();
 
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
   const [provinceData, setProvinceData] = useState();
   const [city, setCity] = useState("");
   const [districts, setDistricts] = useState([]);
@@ -45,6 +50,7 @@ const OrderPage = () => {
 
   const addAddressForm = () => {
     setShowAddAddressForm((form) => !form);
+    setIsClicked(!isClicked);
   };
 
   function handleCityChange(e) {
@@ -102,6 +108,9 @@ const OrderPage = () => {
 
   return address ? (
     <main className=" font-montserrat">
+      {isClicked && (
+        <div className="absolute z-10 bg-gray-700 h-[200vh] w-[200vh]"></div>
+      )}
       <Header />
       <div>
         <div className="bg-[#fafafa] flex px-[13%] pt-4 justify-between">
@@ -123,7 +132,7 @@ const OrderPage = () => {
         </div>
       </div>
       <div className="flex justify-evenly bg-[#fafafa] py-12">
-        <div className="flex flex-wrap justify-between border-2 bg-white shadow-sm w-[750px] h-[670px] p-10">
+        <div className="flex flex-wrap justify-between border-2 bg-white shadow-sm w-[750px] h-[670px] overflow-auto gap-y-10 p-10">
           <button
             className="flex flex-col justify-center items-center border p-2 w-[300px] h-[150px] gap-2"
             onClick={() => addAddressForm()}
@@ -134,8 +143,16 @@ const OrderPage = () => {
           {showAddAddressForm && (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 border bg-white p-4 scale-125 gap-4 w-[390px]"
+              className="flex flex-col absolute z-20 top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 border-2 border-blue-400 rounded-sm bg-white p-4 scale-125 gap-4 w-[390px]"
             >
+              <button className="text-end text-blue-400">
+                <FontAwesomeIcon
+                  type="button"
+                  icon={faCircleXmark}
+                  className="w-[20px] h-[20px]"
+                  onClick={() => addAddressForm()}
+                />
+              </button>
               <div className="flex justify-between gap-4">
                 <label>
                   Name
@@ -193,6 +210,7 @@ const OrderPage = () => {
                     value={city}
                     className="border w-[170px]"
                   >
+                    <option selected disabled></option>
                     {cityNames?.map((city) => (
                       <option value={city} key={city}>
                         {city}
@@ -263,7 +281,12 @@ const OrderPage = () => {
           {address?.map((addressItem, index) => (
             <button
               key={index}
-              className="flex flex-col border p-2 w-[300px] h-[150px] justify-between"
+              className={`flex flex-col border p-2 w-[300px] h-[150px] justify-between ${
+                selectedAddress === index
+                  ? "border-[3px] border-blue-300 rounded-sm scale-[1.07]"
+                  : ""
+              }`}
+              onClick={() => setSelectedAddress(index)}
             >
               <div className="flex w-[280px] justify-between">
                 <div className="flex gap-2 items-center">
@@ -327,14 +350,39 @@ const OrderPage = () => {
               </p>
             </div>
           }
-          <Link to="/payment-page">
-            <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
-              PROCEED TO CHECKOUT
-            </button>
-          </Link>
+          {selectedAddress !== null ? (
+            <div>
+              <Link to="/payment-page">
+                <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
+                  <div className="flex items-center">
+                    <p>PROCEED TO PAYMENT</p>
+                    <FontAwesomeIcon
+                      icon={faCaretRight}
+                      className="w-6 h-6 pr-2"
+                    />
+                  </div>
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <button className="bg-blue-300 w-[150px] py-2 rounded cursor-not-allowed opacity-50">
+                <div className="flex items-center">
+                  <p>PROCEED TO PAYMENT</p>
+                  <FontAwesomeIcon
+                    icon={faCaretRight}
+                    className="w-6 h-6 pr-2"
+                  />
+                </div>
+              </button>
+            </div>
+          )}
           <Link to="/shopping">
             <button className="bg-blue-300 w-[150px] py-2 rounded hover:scale-105 transition duration-300">
-              CONTINUE SHOPPING
+              <div className="flex items-center">
+                <FontAwesomeIcon icon={faCaretLeft} className="w-6 h-6 pl-2" />
+                <p>CONTINUE SHOPPING</p>
+              </div>
             </button>
           </Link>
         </div>
