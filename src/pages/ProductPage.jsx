@@ -94,6 +94,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(fetchSingleProduct(searchParams.productId));
+    window.scrollTo(0, 0);
   }, [searchParams]);
 
   return product.name ? (
