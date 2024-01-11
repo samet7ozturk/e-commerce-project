@@ -71,6 +71,7 @@ const PaymentPage = () => {
     .toFixed(2);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     instanceAxios
       .get("/card")
       .then((response) => {

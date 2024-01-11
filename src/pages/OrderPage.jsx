@@ -71,6 +71,7 @@ const OrderPage = () => {
     .toFixed(2);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     instanceAxios
       .get("/user/address")
       .then((response) => {
