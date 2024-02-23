@@ -22,6 +22,10 @@ import { setCardData } from "../store/actions/paymentActions";
 const PaymentPage = () => {
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
+  const shoppingCard = useSelector((state) => state.payment);
+  console.log(shoppingCard.card);
+
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const [state, setState] = useState({
     number: "",
@@ -54,9 +58,14 @@ const PaymentPage = () => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
 
+  const formatCreditCardNumber = (cardNumber) => {
+    const formattedNumber = cardNumber.replace(/\s/g, "").match(/.{1,4}/g);
+    return formattedNumber ? formattedNumber.join(" ") : "";
+  };
+
   const onSubmit = (data) => {
     instanceAxios
-      .post("/card", data)
+      .post("/user/card", data)
       .then((response) => {
         dispatch(setAddressData(response.data));
         reset();
@@ -73,7 +82,7 @@ const PaymentPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     instanceAxios
-      .get("/card")
+      .get("/user/card")
       .then((response) => {
         dispatch(setCardData(response.data));
         console.log("get: ", response.data);
@@ -114,7 +123,6 @@ const PaymentPage = () => {
               onClick={() => addCardForm()}
             >
               <FontAwesomeIcon icon={faPlus} />
-              {/* <FontAwesomeIcon icon={faCreditCard} /> */}
               <p>New Credit Card</p>
             </button>
             {showAddCardForm && (
@@ -175,6 +183,31 @@ const PaymentPage = () => {
                 </form>
               </div>
             )}
+            {shoppingCard.card?.map((cardItem, index) => (
+              <button
+                key={index}
+                className={`flex flex-col border p-2 w-[300px] h-[150px] justify-between ${
+                  selectedCard === index
+                    ? "border-[3px] border-blue-300 rounded-sm scale-[1.07]"
+                    : ""
+                }`}
+                onClick={() => setSelectedCard(index)}
+              >
+                <div className="flex flex-col w-[280px] h-[130px] justify-between">
+                  <div className="flex gap-4 items-center">
+                    <FontAwesomeIcon icon={faCreditCard} />
+                    <p>{cardItem.name_on_card}</p>
+                  </div>
+                  <div className="text-xl">
+                    <p>{formatCreditCardNumber(cardItem.card_no)}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <p>{cardItem.expire_month} /</p>
+                    <p>{cardItem.expire_year}</p>
+                  </div>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
         <div className="flex flex-col justify-center gap-6 border-2 w-[350px] text-center bg-white shadow-sm px-[5%]">
