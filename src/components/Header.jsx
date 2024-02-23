@@ -20,6 +20,7 @@ import {
   faMagnifyingGlass,
   faTrash,
   faArrowRight,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -41,6 +42,7 @@ const Header = () => {
   const [openMenu2, setOpenMenu2] = useState(false);
   const [openMenu3, setOpenMenu3] = useState(false);
   const [openMenu4, setOpenMenu4] = useState(false);
+  const [openMenu5, setOpenMenu5] = useState(false);
   const [favoritesCount, setFavoritesCount] = useState(0);
 
   const shoppingCart = useSelector((state) => state.shoppingCart);
@@ -68,6 +70,10 @@ const Header = () => {
 
   const toggleBasket = () => {
     setOpenMenu3((basketOpen) => !basketOpen);
+  };
+
+  const toggleMenu = () => {
+    setOpenMenu5(!openMenu5);
   };
 
   const increaseCount = (cartItem) => {
@@ -165,12 +171,110 @@ const Header = () => {
         </div>
       </header>
 
-      <nav className="h-[500px] xl:h-[76px] px-[3%] flex bg-white justify-center xl:justify-between">
-        <div className="flex flex-wrap justify-start xl:justify-between gap-20 flex-col xl:flex-row ">
-          <div className="flex items-center pt-8 xl:pt-0">
+      <nav className="h-[100px] xl:h-[76px] px-[3%] flex bg-white justify-center xl:justify-between items-center xl:items-center">
+        <div className="flex flex-wrap justify-between xl:justify-between gap-40 xl:flex-row ">
+          <div className="flex items-center">
             <h2 className="text-[#252B42] text-2xl">Bandage</h2>
           </div>
-          <div className="flex flex-wrap gap-4 text-[#737373] text-3xl xl:text-sm flex-col xl:flex-row font-normal xl:font-bold">
+          <div className="xl:hidden">
+            <button onClick={toggleMenu}>
+              <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
+            </button>
+            {openMenu5 && (
+              <div className="z-10 absolute top-[8%] right-[6%] bg-white border-2 p-4 flex flex-wrap gap-4 text-[#737373] text-lg xl:text-2xl flex-col xl:flex-row font-normal xl:font-bold">
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/">Home</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/shopping">Shop</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/about-page">About</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/blog">Blog</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/contact-page">Contact</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Link to="/pages">Pages</Link>
+                </div>
+                <div className="flex items-center hover:bg-[#5cb1df] p-2">
+                  <Menu placement="bottom-start">
+                    <MenuHandler>
+                      <button>Categories</button>
+                    </MenuHandler>
+                    <MenuList>
+                      <Menu
+                        placement="right-start"
+                        open={openMenu1}
+                        handler={setOpenMenu1}
+                        allowHover
+                        offset={15}
+                      >
+                        <MenuHandler className="flex items-center justify-between">
+                          <MenuItem>
+                            <p className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat">
+                              Kadın
+                            </p>
+                            <ChevronUpIcon
+                              strokeWidth={2.5}
+                              className={`h-3.5 w-3.5 transition-transform ${
+                                openMenu1 ? "rotate-90" : ""
+                              }`}
+                            />
+                          </MenuItem>
+                        </MenuHandler>
+                        <MenuList>
+                          {femaleCategories.map((category) => (
+                            <MenuItem
+                              className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat"
+                              key={category.id}
+                            >
+                              {category.title}
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </Menu>
+                      <Menu
+                        placement="right-start"
+                        open={openMenu2}
+                        handler={setOpenMenu2}
+                        allowHover
+                        offset={15}
+                      >
+                        <MenuHandler className="flex items-center justify-between">
+                          <MenuItem>
+                            <p className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat">
+                              Erkek
+                            </p>
+                            <ChevronUpIcon
+                              strokeWidth={2.5}
+                              className={`h-3.5 w-3.5 transition-transform ${
+                                openMenu2 ? "rotate-90" : ""
+                              }`}
+                            />
+                          </MenuItem>
+                        </MenuHandler>
+                        <MenuList>
+                          {maleCategories.map((category) => (
+                            <MenuItem
+                              className="text-[#737373] text-3xl xl:text-sm font-normal xl:font-bold font-montserrat"
+                              key={category.id}
+                            >
+                              {category.title}
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </Menu>
+                    </MenuList>
+                  </Menu>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="hidden xl:flex flex-wrap gap-4 text-[#737373] text-3xl xl:text-sm flex-col xl:flex-row font-normal xl:font-bold">
             <div className="flex items-center ">
               <Link to="/">Home</Link>
             </div>
@@ -262,7 +366,10 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="hidden xl:flex flex-wrap gap-8 text-[#23A6F0] items-center justify-end">
+        <div
+          className="hidden xl
+        :flex flex-wrap gap-8 text-[#23A6F0] items-center justify-end"
+        >
           <div className="flex gap-2">
             {token ? (
               <>
@@ -324,7 +431,7 @@ const Header = () => {
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => decreaseCount(cartItem.product)}
-                          className="text-[#23A6F0] w-4   justify-center items-center flex"
+                          className="text-[#23A6F0] w-4 justify-center items-center flex"
                         >
                           -
                         </button>
@@ -333,7 +440,7 @@ const Header = () => {
                         </p>
                         <button
                           onClick={() => increaseCount(cartItem.product)}
-                          className="text-[#23A6F0] w-4  justify-center items-center flex"
+                          className="text-[#23A6F0] w-4 justify-center items-center flex"
                         >
                           +
                         </button>
