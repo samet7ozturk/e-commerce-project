@@ -366,10 +366,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div
-          className="hidden xl
-        :flex flex-wrap gap-8 text-[#23A6F0] items-center justify-end"
-        >
+        <div className="hidden xl:flex flex-wrap gap-8 text-[#23A6F0] items-center justify-end">
           <div className="flex gap-2">
             {token ? (
               <>
