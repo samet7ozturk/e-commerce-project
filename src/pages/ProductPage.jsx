@@ -259,7 +259,10 @@ const ProductPage = () => {
         </div>
       </div>
       <ProductDescription />
-      <BestSellerProduct1 />
+      <div className="py-16">
+        <BestSellerProduct1 />
+      </div>
+
       <div className="flex pt-[72px] pb-32 items-center justify-evenly flex-col xl:flex-row gap-[43px] xl:gap-0">
         <div>
           <img
